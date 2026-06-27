@@ -8,6 +8,7 @@ const footerLinks = [
     href: "/kontakt",
     label: "Boka",
     tone: "pink",
+    booking: true,
   },
 ];
 ---
@@ -40,11 +41,17 @@ const footerLinks = [
 
   <nav class="footer-cell footer-cell--nav" aria-label="Footer navigation">
     {
-      footerLinks.map((link) => (
-        <a class="footer-link" href={link.href} data-tone={link.tone}>
-          {link.label}
-        </a>
-      ))
+      footerLinks.map((link) =>
+        link.booking ? (
+          <button class="footer-link" type="button" data-tone={link.tone} data-booking-trigger>
+            {link.label}
+          </button>
+        ) : (
+          <a class="footer-link" href={link.href} data-tone={link.tone}>
+            {link.label}
+          </a>
+        ),
+      )
     }
   </nav>
 

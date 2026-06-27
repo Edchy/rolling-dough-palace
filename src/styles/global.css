@@ -41,10 +41,8 @@
 
   /* Type: Three-Voice Rule: serif (display), sans (body), mono (labels) */
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body:
-    "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  --font-mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-body: "Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-mono: "Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Z-index scale */
   --z-sticky: 100;
@@ -103,6 +101,106 @@
   --candy-6: #5aa0c2; /* azure */
 }
 
+/* Palette C: Mono (two inks, brutalist) */
+:root[data-palette="mono"] {
+  --paper: #f4f1ea;
+  --bg: #f4f1ea;
+  --text: #1b1b1a;
+  --muted: #57544d;
+  --line: #1b1b1a;
+  --accent: #1b1b1a;
+
+  --block-1: #e7e3da;
+  --block-1-ink: #1b1b1a;
+  --block-2: #1b1b1a;
+  --block-2-ink: #f4f1ea;
+  --frame: #1b1b1a;
+  --olive: #d9d5cb;
+  --candy-5: #cdc9bf;
+  --candy-6: #bdb9af;
+  --candy-7: #2e2c28;
+}
+
+/* Palette D: Harvest (warm gold / forest / terracotta) */
+:root[data-palette="harvest"] {
+  --paper: #f3e9d8;
+  --bg: #f3e9d8;
+  --text: #2b1d14;
+  --muted: #6a4f3a;
+  --line: #2b1d14;
+  --accent: #c0431f;
+
+  --block-1: #e8b75a;
+  --block-1-ink: #2b1d14;
+  --block-2: #3f6b52;
+  --block-2-ink: #f3e9d8;
+  --frame: #c0431f;
+  --olive: #a8a23a;
+  --candy-5: #e09040;
+  --candy-6: #7aa088;
+  --candy-7: #8a3514;
+}
+
+/* Palette E: Candy (loud hot-pink / acid green / electric blue) */
+:root[data-palette="candy"] {
+  --paper: #fff7f0;
+  --bg: #fff7f0;
+  --text: #14123a;
+  --muted: #4a4670;
+  --line: #14123a;
+  --accent: #ff2d8b;
+
+  --block-1: #8cf06a;
+  --block-1-ink: #14123a;
+  --block-2: #2d4cff;
+  --block-2-ink: #fff7f0;
+  --frame: #ff2d8b;
+  --olive: #ffe14d;
+  --candy-5: #ff9e3d;
+  --candy-6: #38d6e8;
+  --candy-7: #d6128f;
+}
+
+/* Palette F: Moody (oxblood / forest / cream) */
+:root[data-palette="moody"] {
+  --paper: #efe7d8;
+  --bg: #efe7d8;
+  --text: #241c17;
+  --muted: #5e5346;
+  --line: #241c17;
+  --accent: #8c2f2a;
+
+  --block-1: #2f4a3a;
+  --block-1-ink: #efe7d8;
+  --block-2: #8c2f2a;
+  --block-2-ink: #efe7d8;
+  --frame: #8c2f2a;
+  --olive: #b08a3e;
+  --candy-5: #c2703a;
+  --candy-6: #5b7d72;
+  --candy-7: #6e2420;
+}
+
+/* Palette G: Retro (70s terracotta / teal / gold) */
+:root[data-palette="retro"] {
+  --paper: #f6ecd9;
+  --bg: #f6ecd9;
+  --text: #2c2118;
+  --muted: #66523c;
+  --line: #2c2118;
+  --accent: #cf5b2a;
+
+  --block-1: #e3b23c;
+  --block-1-ink: #2c2118;
+  --block-2: #1f6f6b;
+  --block-2-ink: #f6ecd9;
+  --frame: #cf5b2a;
+  --olive: #9aa83c;
+  --candy-5: #d98a3d;
+  --candy-6: #5fa8a2;
+  --candy-7: #a8431c;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -139,6 +237,12 @@ main {
 
 a:focus-visible,
 summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+button:focus-visible,
+input:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
@@ -184,7 +288,11 @@ summary:focus-visible {
   display: inline-flex;
   align-items: center;
   padding: 0 clamp(0.9rem, 0.5rem + 1.2vw, 1.9rem);
+  /* .nav-cta is a <button>, the rest are <a>; reset button chrome (keep the
+     left divider) so they render identically. */
+  border: 0;
   border-left: 1px solid var(--line);
+  background: none;
   font-family: var(--font-mono);
   font-size: 0.74rem;
   font-weight: 500;
@@ -192,6 +300,7 @@ summary:focus-visible {
   text-transform: uppercase;
   color: var(--text);
   white-space: nowrap;
+  cursor: pointer;
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
@@ -214,6 +323,87 @@ summary:focus-visible {
 .nav-cta:hover {
   background: var(--text);
   color: var(--paper);
+}
+
+/* ---------- Theme picker (variant comparison pages only) ---------- */
+/* Minimal theme picker: a single colour circle that drops down the other
+   palettes as circles. Lives in its own nav cell with the left divider. */
+.theme-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 clamp(0.9rem, 0.5rem + 1.2vw, 1.9rem);
+  border-left: 1px solid var(--line);
+}
+
+.theme-swatch {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: var(--swatch, var(--accent));
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.theme-picker__current {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.theme-picker__current:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.theme-picker__menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0.6rem;
+  list-style: none;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.theme-picker__menu[hidden] {
+  display: none;
+}
+
+.theme-picker__option {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.theme-picker__option .theme-swatch {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.theme-picker__option[aria-checked="true"] .theme-swatch {
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.25),
+    0 0 0 2px var(--paper),
+    0 0 0 3px var(--text);
+}
+
+.theme-picker__option:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* ---------- Hamburger toggle (mobile only) ---------- */
@@ -258,9 +448,18 @@ summary:focus-visible {
   overflow: hidden;
 }
 
+.booking-locked {
+  overflow: hidden;
+}
+
 .nav-modal {
   position: fixed;
   inset: 0;
+  /* Pin to the dynamic viewport so the bottom never hides under the mobile
+     browser chrome / home bar. Without this the modal is sized to the large
+     viewport and the last link sits behind the toolbar, looking un-scrollable. */
+  height: 100dvh;
+  max-height: 100dvh;
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -288,40 +487,70 @@ summary:focus-visible {
 }
 
 .nav-modal__bar {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex: 0 0 auto;
-  padding: clamp(1rem, 0.7rem + 1.5vw, 1.4rem)
+  /* Match the closed .site-header / .brand cell so the bar is the same
+     height whether the menu is open or closed. */
+  padding: clamp(0.7rem, 0.4rem + 0.8vw, 1.1rem)
     max(calc((100vw - var(--shell)) / 2), 1.25rem);
+  /* Reserve room for the absolutely-positioned close button so the brand
+     never slides under it. */
+  padding-right: max(calc((100vw - var(--shell)) / 2) + 4.25rem, 5.5rem);
   background: var(--paper);
   border-bottom: 1px solid var(--line);
 }
 
+/* Mirror the closed header's .wordmark exactly so the brand is identical
+   open or closed. */
 .nav-modal__brand {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(1rem, 0.8rem + 1vw, 1.3rem);
+  font-size: clamp(1.15rem, 0.7rem + 1.5vw, 1.85rem);
   letter-spacing: -0.01em;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 0.92;
   color: var(--text);
-  max-width: 9ch;
 }
 
+/* Mirror the closed hamburger toggle: a flush yellow square pinned to the
+   top-right corner of the bar, just with an "×" instead of the bars.
+   Absolutely positioned so it hugs the corner regardless of the bar's
+   responsive padding (negating that padding with margins drifts because
+   100vw resolves differently in margin vs padding contexts). */
 .nav-modal__close {
-  flex: 0 0 auto;
-  padding: 0.55rem 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(3.5rem, 14vw, 4.25rem);
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--olive);
+  color: var(--text);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.nav-modal__close:hover {
   background: var(--text);
   color: var(--paper);
-  border: 0;
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
+}
+
+.nav-modal__close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .nav-modal__links {
@@ -329,22 +558,51 @@ summary:focus-visible {
   flex: 1 1 auto;
   flex-direction: column;
   min-height: 0;
+  /* When the viewport is too short for the links to fill it at their
+     natural height, scroll instead of clipping off the bottom. */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .nav-modal__link {
+  position: relative;
   display: flex;
-  align-items: baseline;
-  gap: clamp(1rem, 0.6rem + 2vw, 1.8rem);
-  flex: 1 1 0;
-  min-height: 0;
+  align-items: center;
+  justify-content: center;
+  /* Grow to share a tall viewport, but never shrink below the link's own
+     content height (auto basis) so short viewports scroll, not clip. */
+  flex: 1 0 auto;
+  /* The CTA is a <button>; the rest are <a>. Reset button chrome so both
+     render identically. */
+  width: 100%;
   padding: clamp(1.25rem, 0.8rem + 3vw, 2.4rem)
     max(calc((100vw - var(--shell)) / 2), 1.5rem);
+  border: 0;
   border-bottom: 1px solid var(--line);
+  background: none;
   color: var(--text);
+  font: inherit;
+  text-align: center;
   text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease;
   /* Staggered entrance: each link rises in after the panel opens. */
   opacity: 0;
   transform: translateY(1rem);
+}
+
+/* Icons sit in a fixed left column (same x on every row) so they line up
+   vertically, while the label stays centered in the box. */
+.nav-modal__icon {
+  position: absolute;
+  left: max(calc((100vw - var(--shell)) / 2), 1.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.92em;
+  height: 0.92em;
+  font-size: clamp(2.2rem, 1.2rem + 7vw, 4rem);
+  color: var(--row-ink, currentColor);
 }
 
 .nav-modal.is-open .nav-modal__link {
@@ -352,31 +610,29 @@ summary:focus-visible {
   animation-delay: calc(0.12s + var(--i) * 0.06s);
 }
 
+/* Each band carries a contrasting candy hue (shared by its label + icon) so
+   the menu reads lively rather than flat ink-on-pastel. Mirrors the menu-row
+   --row-ink pattern; hues are picked to stay legible on each field. */
 .nav-modal__link[data-tone="mint"] {
   background: var(--block-1);
+  --row-ink: var(--accent); /* candy pink on mint */
 }
 .nav-modal__link[data-tone="lilac"] {
   background: var(--block-2);
+  --row-ink: var(--candy-7); /* deep grape on lilac */
 }
 .nav-modal__link[data-tone="yellow"] {
   background: var(--olive);
+  --row-ink: var(--frame); /* tomato red on yellow */
 }
 .nav-modal__link[data-tone="pink"] {
   background: var(--accent);
+  --row-ink: var(--olive); /* electric yellow on candy pink */
   color: var(--paper);
 }
 
 .nav-modal__link:last-child {
   border-bottom: 0;
-}
-
-.nav-modal__index {
-  flex: 0 0 auto;
-  font-family: var(--font-mono);
-  font-size: clamp(0.8rem, 0.7rem + 0.5vw, 1rem);
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  opacity: 0.7;
 }
 
 .nav-modal__label {
@@ -385,10 +641,278 @@ summary:focus-visible {
   font-size: clamp(2.2rem, 1.2rem + 7vw, 4rem);
   line-height: 0.95;
   letter-spacing: -0.02em;
+  color: var(--row-ink, currentColor);
 }
 
-.nav-modal__link:hover .nav-modal__label {
-  font-style: italic;
+.nav-modal__link:hover {
+  background: var(--text);
+  color: var(--paper);
+  /* Flip label + icon (both read --row-ink) to paper for the clean ink fill. */
+  --row-ink: var(--paper);
+}
+
+/* ---------- Booking modal ---------- */
+.booking-modal {
+  /* Calm the modal down: retint the screamy candy pink to the indigo ink
+     locally, so the intro panel, submit, checked choice, and focus rings
+     all read quiet without touching the brand palette elsewhere. */
+  --accent: var(--text);
+  position: relative;
+  width: min(980px, calc(100vw - 32px));
+  max-height: min(880px, calc(100svh - 32px));
+  padding: 0;
+  border: 1px solid var(--text);
+  background: var(--paper);
+  color: var(--text);
+  overflow: hidden;
+}
+
+.booking-modal::backdrop {
+  background: rgba(42, 35, 80, 0.58);
+}
+
+.booking-modal__panel {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1fr);
+  align-items: stretch;
+  height: min(880px, calc(100svh - 32px));
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.booking-modal__intro {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: clamp(1.4rem, 1rem + 2.6vw, 3rem);
+  padding-top: clamp(2.4rem, 1.6rem + 3vw, 4rem);
+  background: var(--accent);
+  border-right: 1px solid var(--text);
+  color: var(--paper);
+  overflow: auto;
+}
+
+.booking-modal__intro h2 {
+  max-width: 14ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1rem + 3.2vw, 3.6rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  color: currentColor;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.booking-modal__intro p {
+  max-width: 24ch;
+  margin: 1.2rem 0 0;
+  font-size: clamp(1.05rem, 1rem + 0.35vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.booking-modal__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--text);
+  border-bottom: 1px solid var(--text);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--text);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.booking-modal__close:hover {
+  background: var(--text);
+  color: var(--paper);
+}
+
+.booking-modal__close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -4px;
+}
+
+.booking-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 0;
+  min-height: 0;
+  padding-top: clamp(2.4rem, 1.6rem + 3vw, 4rem);
+  padding-bottom: clamp(3rem, 2rem + 4vw, 5rem);
+  background: var(--paper);
+  overflow-y: auto;
+}
+
+.booking-form__field {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(1rem, 0.8rem + 0.9vw, 1.5rem);
+  border: 0;
+  border-right: 1px solid var(--text);
+  border-bottom: 1px solid var(--text);
+}
+
+.booking-form__field--right,
+.booking-form__field--full {
+  border-right: 0;
+}
+
+.booking-form__field--full {
+  grid-column: 1 / -1;
+}
+
+.booking-form__field span {
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.booking-form input,
+.booking-form textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.72rem 0.85rem;
+  border: 1px solid var(--text);
+  border-radius: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.booking-form textarea {
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.booking-form input::placeholder,
+.booking-form textarea::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.booking-form__hint {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.3;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.booking-form__req {
+  color: var(--accent);
+}
+
+.booking-form__choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.booking-form__choices label {
+  position: relative;
+  display: inline-grid;
+  cursor: pointer;
+}
+
+/* Hide the radio without taking it out of the document flow in a way that
+   lets the browser scroll-into-view jump the form. Pinned inside its own
+   label and clipped, so focusing it never reflows the scroll container. */
+.booking-form__choices input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.booking-form__choices span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0.68rem 1rem;
+  border: 1px solid var(--text);
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.booking-form__choices input:checked + span {
+  background: var(--text);
+  color: var(--paper);
+}
+
+.booking-form__choices input:focus-visible + span {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+
+.booking-form__submit {
+  grid-column: 1 / -1;
+  justify-self: stretch;
+  min-height: 56px;
+  margin: clamp(1rem, 0.6rem + 1.4vw, 1.75rem) clamp(1rem, 0.8rem + 0.9vw, 1.5rem) 0;
+  border: 0;
+  background: var(--text);
+  color: var(--paper);
+}
+
+.booking-form__submit:hover {
+  background: var(--olive);
+  color: var(--text);
+}
+
+.booking-form__mark {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(1.4rem, 1rem + 1.6vw, 2.25rem);
+}
+
+.booking-form__mark svg {
+  width: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+  height: auto;
+  fill: var(--text);
+  opacity: 0.55;
 }
 
 @keyframes nav-link-rise {
@@ -411,6 +935,73 @@ summary:focus-visible {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .booking-modal {
+    /* Fixed-pin the dialog to the full visible viewport. Using fixed +
+       dvh (dynamic viewport height) keeps it sized to the area actually
+       on-screen as the mobile browser chrome shows/hides, so the bottom of
+       the modal is never pushed under the chrome. */
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    border: 0;
+    overflow: hidden;
+  }
+
+  .booking-modal__panel {
+    grid-template-columns: 1fr;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Space below the submit so it clears the mobile browser chrome /
+       home-bar safe area and stays comfortably tappable. This must live on
+       the scroll container itself: padding-bottom on the last flex/grid
+       child is dropped at the end of an overflow:auto scroll in WebKit/Blink,
+       which left the submit flush against the bottom edge. */
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .booking-form {
+    grid-template-columns: 1fr;
+    overflow-y: visible;
+    padding-bottom: 0;
+  }
+
+  .booking-form__mark {
+    /* Centered mark also carries the home-bar safe-area gap, so the submit
+       above it never sits flush against the bottom edge. */
+    margin-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .booking-modal__intro {
+    position: relative;
+    min-height: 0;
+    padding-right: clamp(3.4rem, 12vw, 4rem);
+    border-right: 0;
+    border-bottom: 1px solid var(--text);
+    overflow: visible;
+  }
+
+  .booking-modal__intro h2 {
+    max-width: 14ch;
+    margin-top: 0;
+  }
+
+  .booking-form__field {
+    border-right: 0;
+  }
+
+  .booking-form__choices {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -455,6 +1046,7 @@ summary:focus-visible {
   letter-spacing: -0.03em;
   text-transform: uppercase;
   text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 .footer-cell--brand p {
@@ -534,7 +1126,7 @@ summary:focus-visible {
 }
 
 .footer-cell--legal .footer-privacy a {
-  color: var(--paper);
+  color: var(--muted);
   text-decoration: underline;
 }
 
@@ -546,6 +1138,7 @@ summary:focus-visible {
   text-transform: uppercase;
   white-space: nowrap;
   text-align: center;
+  color: var(--muted);
 }
 
 .footer-cell--nav {
@@ -563,10 +1156,15 @@ summary:focus-visible {
   align-items: center;
   justify-content: center;
   text-align: center;
+  width: 100%;
   min-height: clamp(5.5rem, 8vw, 8rem);
   padding: 1.2rem;
+  /* The "Boka" cell is a <button>, the rest are <a>; reset button chrome but
+     keep the grid seam borders. */
+  border: 0;
   border-right: 1px solid var(--paper);
   border-bottom: 1px solid var(--paper);
+  cursor: pointer;
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 1rem + 1.4vw, 2rem);
   font-weight: 900;
@@ -975,10 +1573,10 @@ summary:focus-visible {
    column; the name spans the wide column and carries the row. */
 .menu-item {
   display: grid;
-  grid-template-columns: auto minmax(110px, 0.22fr) minmax(0, 1fr);
+  grid-template-columns: minmax(110px, 0.22fr) minmax(0, 1fr);
   grid-template-areas:
-    "index sign name"
-    "index sign desc";
+    "sign name"
+    "sign desc";
   align-items: center;
   column-gap: clamp(1.25rem, 0.8rem + 2.4vw, 3rem);
   row-gap: clamp(0.5rem, 0.35rem + 0.5vw, 0.9rem);
@@ -1017,15 +1615,6 @@ summary:focus-visible {
 
 .menu-item:last-child {
   border-bottom: 0;
-}
-
-.menu-index {
-  grid-area: index;
-  align-self: start;
-  font-family: var(--font-mono);
-  font-size: clamp(0.85rem, 0.78rem + 0.3vw, 1rem);
-  letter-spacing: 0.04em;
-  color: var(--row-ink); /* match the row's name + icon hue */
 }
 
 /* The name is the hero: the largest type in the block. */
@@ -1554,7 +2143,6 @@ summary:focus-visible {
 }
 
 .step-list {
-  counter-reset: step;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1565,20 +2153,21 @@ summary:focus-visible {
 }
 
 .step-list li {
-  counter-increment: step;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   min-height: 190px;
   padding: clamp(1.4rem, 1rem + 1.6vw, 2.2rem);
+  /* Reserve room for the corner wheel so text can't run under it. */
+  padding-right: calc(clamp(1.4rem, 1rem + 1.6vw, 2.2rem) + 1.6rem + 0.6rem);
   border-right: 1px solid var(--text);
   border-bottom: 1px solid var(--text);
   color: var(--text); /* indigo ink, readable on the candy boxes */
 }
 
 /* Wheel stamped in the corner of each step box: the quirky brand mark,
-   sized like a small motif. The mono index keeps its job below. */
+   sized like a small motif. */
 .step-list li > .glyph-mark {
   position: absolute;
   top: clamp(1.4rem, 1rem + 1.6vw, 2.2rem);
@@ -1597,13 +2186,6 @@ summary:focus-visible {
 
 .step-list li:nth-child(3) {
   background: var(--olive); /* electric yellow */
-}
-
-.step-list li::before {
-  content: counter(step, decimal-leading-zero);
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  letter-spacing: 0.03em;
 }
 
 .step-list span {
@@ -1683,6 +2265,7 @@ summary:focus-visible {
 .colour-pair {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--text);
   border-bottom: 1px solid var(--text);
 }
 
@@ -1713,14 +2296,17 @@ summary:focus-visible {
   color: currentColor;
 }
 
+/* Fields chosen to NOT match the cell directly above (mint step-cell over
+   "Maten", pink step-cell over "Var vi kör"): paper and ink, a quiet
+   light/dark pair. Class names kept for back-compat. */
 .colour-pair__cell--mint {
-  background: var(--block-1);
-  color: var(--block-1-ink);
+  background: var(--paper);
+  color: var(--text);
 }
 
 .colour-pair__cell--pink {
-  background: var(--accent);
-  color: var(--bg);
+  background: var(--text);
+  color: var(--paper);
   border-left: 1px solid var(--text);
 }
 
@@ -2208,7 +2794,6 @@ summary:focus-visible {
 }
 
 .contact-brief ul {
-  counter-reset: brief;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2219,13 +2804,15 @@ summary:focus-visible {
 }
 
 .contact-brief li {
-  counter-increment: brief;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   min-height: 150px;
   padding: clamp(1.2rem, 0.9rem + 1vw, 1.8rem);
+  /* Reserve room for the absolutely-positioned wheel in the top-right so the
+     text never runs under it (the wider mono body made long lines collide). */
+  padding-right: calc(clamp(1.2rem, 0.9rem + 1vw, 1.8rem) + 1.4rem + 0.6rem);
   border-right: 1px solid var(--text);
   border-bottom: 1px solid var(--text);
   color: var(--text);
@@ -2258,14 +2845,6 @@ summary:focus-visible {
 
 .contact-brief li:nth-child(4) {
   background: var(--paper);
-}
-
-.contact-brief li::before {
-  content: counter(brief, decimal-leading-zero);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.03em;
-  opacity: 0.72;
 }
 
 /* ---------- Motion safety ---------- */
@@ -2429,11 +3008,10 @@ summary:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  /* Mobile: stack the row; the food icon sits up top with the index. */
+  /* Mobile: stack the row; the food icon sits up top. */
   .menu-item {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "index"
       "sign"
       "name"
       "desc";
@@ -2620,7 +3198,8 @@ summary:focus-visible {
     display: flex;
   }
 
-  .wordmark {
+  .wordmark,
+  .nav-modal__brand {
     font-size: 1.05rem;
   }
 }
@@ -2660,7 +3239,10 @@ summary:focus-visible {
   }
 
   .footer-wordmark {
-    font-size: clamp(3.2rem, 20vw, 5.4rem);
+    /* Floor must keep the longest word ("PEDALLING") inside the cell's
+       content width or it pushes the page wider than the viewport and the
+       whole site sidescrolls. 13vw keeps it fitting down to ~320px. */
+    font-size: clamp(2.6rem, 13vw, 5.4rem);
   }
 
   .footer-cell--nav {

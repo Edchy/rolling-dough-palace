@@ -4,9 +4,21 @@
 // On small screens the cells collapse to a hamburger that opens a
 // full-viewport candy-block menu modal.
 const links = [
-  { href: "/catering", label: "Catering", tone: "mint" },
-  { href: "/om-oss", label: "Om oss", tone: "lilac" },
-  { href: "/kontakt", label: "Kontakt", tone: "yellow" },
+  { href: "/catering", label: "Catering", tone: "mint", icon: "onion" },
+  { href: "/om-oss", label: "Om oss", tone: "lilac", icon: "tomato" },
+  { href: "/kontakt", label: "Kontakt", tone: "yellow", icon: "diavola" },
+];
+
+// Theme picker: swaps the site palette (CSS custom properties) in place.
+// Each theme is a data-palette value plus its accent colour for the swatch.
+const themes = [
+  { id: "pastel", name: "Pastel", accent: "#ff5bbf" },
+  { id: "italian", name: "Italiensk", accent: "#c8102e" },
+  { id: "mono", name: "Mono", accent: "#1b1b1a" },
+  { id: "harvest", name: "Skörd", accent: "#c0431f" },
+  { id: "candy", name: "Godis", accent: "#ff2d8b" },
+  { id: "moody", name: "Mörk", accent: "#8c2f2a" },
+  { id: "retro", name: "Retro", accent: "#cf5b2a" },
 ];
 ---
 
@@ -16,6 +28,39 @@ const links = [
   </a>
 
   <nav class="nav" aria-label="Huvudnavigation">
+    <div class="theme-picker">
+      <button
+        class="theme-picker__current"
+        type="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-label="Välj tema"
+      >
+        <span class="theme-swatch" data-theme-current aria-hidden="true"></span>
+      </button>
+      <ul class="theme-picker__menu" role="menu" hidden>
+        {
+          themes.map((t) => (
+            <li role="none">
+              <button
+                class="theme-picker__option"
+                type="button"
+                role="menuitemradio"
+                data-theme={t.id}
+                aria-label={t.name}
+                title={t.name}
+              >
+                <span
+                  class="theme-swatch"
+                  style={`--swatch:${t.accent}`}
+                  aria-hidden="true"
+                />
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
     {
       links.map((link) => (
         <a class="nav-link" href={link.href}>
@@ -23,7 +68,7 @@ const links = [
         </a>
       ))
     }
-    <a class="nav-link nav-cta" href="/kontakt">Boka oss</a>
+    <button class="nav-link nav-cta" type="button" data-booking-trigger>Boka oss</button>
   </nav>
 
   <button
@@ -42,9 +87,9 @@ const links = [
 
 <div class="nav-modal" id="nav-modal" hidden>
   <div class="nav-modal__bar">
-    <a class="nav-modal__brand" href="/">Pedalling Pizza Palace</a>
+    <a class="nav-modal__brand" href="/">Pedalling<br />Pizza Palace</a>
     <button class="nav-modal__close" type="button" aria-label="Stäng meny">
-      <span aria-hidden="true">Stäng</span>
+      <span aria-hidden="true">×</span>
     </button>
   </div>
 
@@ -57,24 +102,80 @@ const links = [
           data-tone={link.tone}
           style={`--i:${i}`}
         >
-          <span class="nav-modal__index">{`0${i + 1}`}</span>
+          <span class={`glyph-mark glyph-mark--${link.icon} nav-modal__icon`} aria-hidden="true" />
           <span class="nav-modal__label">{link.label}</span>
         </a>
       ))
     }
-    <a
+    <button
       class="nav-modal__link nav-modal__link--cta"
-      href="/kontakt"
+      type="button"
       data-tone="pink"
+      data-booking-trigger
       style={`--i:${links.length}`}
     >
-      <span class="nav-modal__index">{`0${links.length + 1}`}</span>
+      <span class="glyph-mark glyph-mark--ost nav-modal__icon" aria-hidden="true" />
       <span class="nav-modal__label">Boka oss</span>
-    </a>
+    </button>
   </nav>
 </div>
 
 <script>
+  // Theme picker: swap the site palette in place and remember the choice.
+  const picker = document.querySelector<HTMLElement>(".theme-picker");
+  const pickerBtn = picker?.querySelector<HTMLButtonElement>(".theme-picker__current");
+  const pickerMenu = picker?.querySelector<HTMLElement>(".theme-picker__menu");
+  const currentSwatch = picker?.querySelector<HTMLElement>("[data-theme-current]");
+  const options = picker
+    ? Array.from(picker.querySelectorAll<HTMLButtonElement>(".theme-picker__option"))
+    : [];
+
+  const applyTheme = (id: string) => {
+    document.documentElement.setAttribute("data-palette", id);
+    const accent = options.find((o) => o.dataset.theme === id)?.querySelector<HTMLElement>(".theme-swatch")?.style.getPropertyValue("--swatch");
+    if (currentSwatch && accent) currentSwatch.style.setProperty("--swatch", accent);
+    options.forEach((o) =>
+      o.setAttribute("aria-checked", String(o.dataset.theme === id)),
+    );
+    try {
+      localStorage.setItem("ppp-theme", id);
+    } catch {}
+  };
+
+  const closePicker = () => {
+    if (!pickerMenu || !pickerBtn) return;
+    pickerMenu.hidden = true;
+    pickerBtn.setAttribute("aria-expanded", "false");
+  };
+
+  if (picker && pickerBtn && pickerMenu) {
+    // Restore the saved theme (the inline boot script sets the attribute
+    // pre-paint; here we just sync the swatch + checked state).
+    const saved = document.documentElement.getAttribute("data-palette") || "pastel";
+    applyTheme(saved);
+
+    pickerBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = pickerBtn.getAttribute("aria-expanded") === "true";
+      pickerMenu.hidden = isOpen;
+      pickerBtn.setAttribute("aria-expanded", String(!isOpen));
+    });
+
+    options.forEach((opt) =>
+      opt.addEventListener("click", () => {
+        applyTheme(opt.dataset.theme || "pastel");
+        closePicker();
+      }),
+    );
+
+    document.addEventListener("click", (e) => {
+      if (!picker.contains(e.target as Node)) closePicker();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closePicker();
+    });
+  }
+
   const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
   const modal = document.querySelector<HTMLElement>(".nav-modal");
   const closeBtn = modal?.querySelector<HTMLButtonElement>(".nav-modal__close");
@@ -110,8 +211,11 @@ const links = [
 
     toggle.addEventListener("click", open);
     closeBtn.addEventListener("click", close);
-    modal.querySelectorAll(".nav-modal__link").forEach((a) =>
-      a.addEventListener("click", close),
+    modal.querySelectorAll<HTMLElement>(".nav-modal__link").forEach((a) =>
+      a.addEventListener("click", () => {
+        if (a.hasAttribute("data-booking-trigger")) return;
+        close();
+      }),
     );
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && modal.classList.contains("is-open")) close();

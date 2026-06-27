@@ -4,7 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 // Real press mentions from the original site's article links.
 const press = [
   {
-    outlet: "UNT",
+    outlet: "Uppsala Nya Tidning",
     title: "De driver en pizzeria på cykel med en vedugn på släp",
     href: "https://unt.se/nyheter/ekonomi/artikel/de-driver-en-pizzeria-pa-cykel-med-en-vedugn-pa-slap/rkmyk5zj",
   },
@@ -19,7 +19,7 @@ const press = [
     href: "https://sverigesradio.se/artikel/valborgsplanerna-ska-salja-pizza-med-hemmagjord-cykelugn",
   },
   {
-    outlet: "UNT",
+    outlet: "Uppsala Nya Tidning",
     title: "Möt Uppsalas cyklande pizzakollektiv",
     href: "https://unt.se/nyheter/uppsala/artikel/tv-mot-uppsalas-cyklande-pizzakollektiv/jogomvgr",
   },
@@ -57,7 +57,6 @@ const press = [
   <section class="om-photo">
     <picture>
       <source type="image/avif" srcset="/images/hero-1920.avif" />
-      <source type="image/webp" srcset="/images/hero-1920.webp" />
       <img
         src="/images/hero-1600.jpg"
         alt="Pedalling Pizza Palace på plats med fordon och vedugn"
@@ -100,7 +99,6 @@ const press = [
       <figure class="om-frame om-frame--a">
         <picture>
           <source type="image/avif" srcset="/images/trucks.avif" />
-          <source type="image/webp" srcset="/images/trucks.webp" />
           <img
             src="/images/trucks-1600.jpg"
             alt="Ombyggda italienska Piaggio-fordon med vedugnar"
@@ -155,7 +153,7 @@ const press = [
 
   {/* ---------- Press: real mentions, outbound cards ---------- */}
   <section class="press">
-    <h2>Omskrivna i</h2>
+    <h2>Snacket går</h2>
     <ul class="press-list">
       {
         press.map((item) => (
@@ -174,7 +172,6 @@ const press = [
   <section class="om-photo">
     <picture>
       <source type="image/avif" srcset="/images/pizza-1520.avif" />
-      <source type="image/webp" srcset="/images/pizza-1520.webp" />
       <img
         src="/images/pizza-1100.jpg"
         alt="Färdig napolitansk pizza direkt från vedugnen"

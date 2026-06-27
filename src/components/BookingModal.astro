@@ -1,0 +1,176 @@
+---
+const today = new Date().toLocaleDateString("sv-SE");
+---
+
+<dialog class="booking-modal" id="booking-modal" aria-labelledby="booking-title">
+  <button class="booking-modal__close" type="button" aria-label="Stäng bokningsformulär">
+    <span aria-hidden="true">×</span>
+  </button>
+
+  <div class="booking-modal__panel">
+    <div class="booking-modal__intro">
+      <h2 id="booking-title">Berätta om ert event.</h2>
+      <p>Fyll i formuläret med det ni vet så hör vi av oss inom kort.</p>
+    </div>
+
+    <form
+      class="booking-form"
+    >
+      <div class="booking-form__field booking-form__field--full" role="radiogroup" aria-label="Vart är ditt evenemang?">
+        <span>Vart är ditt evenemang? <span class="booking-form__req" aria-hidden="true">*</span></span>
+        <p class="booking-form__hint">Välj stad</p>
+        <div class="booking-form__choices">
+          <label>
+            <input type="radio" name="Plats" value="Uppsala" required />
+            <span>Uppsala</span>
+          </label>
+          <label>
+            <input type="radio" name="Plats" value="Stockholm" />
+            <span>Stockholm</span>
+          </label>
+          <label>
+            <input type="radio" name="Plats" value="Göteborg" />
+            <span>Göteborg</span>
+          </label>
+        </div>
+      </div>
+
+      <label class="booking-form__field">
+        <span>Namn</span>
+        <input type="text" name="Namn" autocomplete="name" />
+      </label>
+
+      <label class="booking-form__field booking-form__field--right">
+        <span>Antal pizzor, typ?</span>
+        <input type="text" name="Antal pizzor, typ" placeholder="T.ex. 40 st, gärna margherita" />
+      </label>
+
+      <label class="booking-form__field">
+        <span>Datum</span>
+        <input type="date" name="Datum" value={today} />
+      </label>
+
+      <label class="booking-form__field booking-form__field--right">
+        <span>Ungefärlig tid för servering</span>
+        <input type="text" name="Ungefärlig tid för servering" placeholder="T.ex. runt 14-15" />
+      </label>
+
+      <label class="booking-form__field booking-form__field--full">
+        <span>Adress</span>
+        <input type="text" name="Adress" autocomplete="street-address" placeholder="Adress" />
+      </label>
+
+      <label class="booking-form__field">
+        <span>Postnummer</span>
+        <input type="text" name="Postnummer" autocomplete="postal-code" placeholder="Postnummer" />
+      </label>
+
+      <label class="booking-form__field booking-form__field--right">
+        <span>Telefon</span>
+        <input type="tel" name="Telefon" autocomplete="tel" placeholder="Telefon" />
+      </label>
+
+      <label class="booking-form__field booking-form__field--full">
+        <span>E-post</span>
+        <input type="email" name="E-post" autocomplete="email" placeholder="E-post" />
+      </label>
+
+      <label class="booking-form__field booking-form__field--full">
+        <span>Övriga frågor eller önskemål</span>
+        <textarea name="Övriga frågor eller önskemål" rows="4" placeholder="Berätta gärna mer om ert event, allergier, eller vad ni undrar över"></textarea>
+      </label>
+
+      <div class="booking-form__field booking-form__field--full" role="radiogroup" aria-label="Är ni ett företag?">
+        <span>Är ni ett företag?</span>
+        <div class="booking-form__choices booking-form__choices--compact">
+          <label>
+            <input type="radio" name="Företag" value="Nej" />
+            <span>Nej</span>
+          </label>
+          <label>
+            <input type="radio" name="Företag" value="Ja" />
+            <span>Ja</span>
+          </label>
+        </div>
+      </div>
+
+      <button class="button primary booking-form__submit" type="submit">Skicka offertförfrågan</button>
+
+      <div class="booking-form__mark" aria-hidden="true">
+        <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <path d="m125.78 284.22c-9.4414 0-17.84-5.0781-23.18-14.059-12.578-21.16-6.0781-57.078 17.398-96.062 39.922-66.301 130.9-108.76 192.28-110.08 29.02-0.55859 49.98 7.6406 60.738 23.879 8.7617 13.219 11.082 25.121 6.9414 35.422-8.1602 20.301-39.18 27.262-64.082 32.84-9.2617 2.0781-18 4.0391-23.301 6.2188-0.058594 0.019532-0.12109 0.039063-0.17969 0.058594-1.0586 0.39844-105.48 40.941-130.06 92-8.8008 18.301-21.719 29.121-35.422 29.719-0.37891 0.019532-0.78125 0.019532-1.1602 0.019532zm189.44-204.22c-0.85938 0-1.7188 0-2.6016 0.019531-57.379 1.2383-142.98 42.641-178.92 102.34-24.02 39.879-24.359 67.82-17.34 79.621 1.7617 2.9609 4.7812 6.4609 9.8789 6.2188 5.8008-0.26172 14.539-5.8203 21.699-20.68 27.18-56.457 132.98-97.781 138.66-99.957 6.5586-2.6797 15.48-4.6797 25.781-7 20.141-4.5195 47.719-10.699 52.742-23.199 2.0586-5.1016 0.21875-12.039-5.4414-20.602-7.1797-10.84-22.922-16.762-44.461-16.762zm-25.68 74.996h0.078126z" />
+          <path d="m396.34 447.98c-4 0-8-1.2617-11.398-3.7617l-240.94-177.02c-3.5586-2.6211-4.3203-7.6211-1.6992-11.18 2.6211-3.5586 7.6211-4.3203 11.18-1.6992l240.92 177c1.5781 1.1406 2.9805 0.57813 3.6992 0.12109 0.69922-0.44141 1.8398-1.4805 1.4609-3.3984l-55.219-288.42c-0.83984-4.3398 2.0195-8.5391 6.3594-9.3594 4.3789-0.82031 8.5391 2.0195 9.3594 6.3594l55.219 288.42c1.5 7.8398-1.8789 15.66-8.6406 19.918-3.1797 2-6.7383 3-10.301 3z" />
+          <path d="m262.26 255.04c0 29.641-44.48 29.641-44.48 0 0-29.641 44.48-29.641 44.48 0z" />
+          <path d="m355.22 198.44c0 29.641-44.461 29.641-44.461 0s44.461-29.641 44.461 0z" />
+          <path d="m352.2 284.34c0 29.641-44.48 29.641-44.48 0s44.48-29.641 44.48 0z" />
+          <path d="m350.18 362.16c0 29.641-44.48 29.641-44.48 0s44.48-29.641 44.48 0z" />
+        </svg>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<script>
+  const bookingModal = document.querySelector<HTMLDialogElement>("#booking-modal");
+  const bookingForm = bookingModal?.querySelector<HTMLFormElement>(".booking-form");
+  const bookingClose = bookingModal?.querySelector<HTMLButtonElement>(".booking-modal__close");
+  let bookingReturnTarget: HTMLElement | null = null;
+
+  const closeNavModal = () => {
+    const navModal = document.querySelector<HTMLElement>(".nav-modal");
+    const navToggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+    if (!navModal?.classList.contains("is-open")) return;
+
+    navModal.classList.remove("is-open");
+    navModal.hidden = true;
+    document.documentElement.classList.remove("nav-locked");
+    navToggle?.setAttribute("aria-expanded", "false");
+  };
+
+  const openBookingModal = (target: HTMLElement | null) => {
+    if (!bookingModal) return;
+
+    bookingReturnTarget = target;
+    closeNavModal();
+
+    if (typeof bookingModal.showModal === "function") {
+      bookingModal.showModal();
+    } else {
+      bookingModal.setAttribute("open", "");
+    }
+    document.documentElement.classList.add("booking-locked");
+  };
+
+  const closeBookingModal = () => {
+    if (!bookingModal) return;
+
+    if (bookingModal.open && typeof bookingModal.close === "function") {
+      bookingModal.close();
+    } else {
+      bookingModal.removeAttribute("open");
+    }
+  };
+
+  document.querySelectorAll<HTMLElement>("[data-booking-trigger]").forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      openBookingModal(trigger);
+    });
+  });
+
+  bookingClose?.addEventListener("click", closeBookingModal);
+
+  bookingForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+
+  bookingModal?.addEventListener("click", (event) => {
+    if (event.target === bookingModal) closeBookingModal();
+  });
+
+  bookingModal?.addEventListener("close", () => {
+    document.documentElement.classList.remove("booking-locked");
+    bookingReturnTarget?.focus();
+    bookingReturnTarget = null;
+  });
+</script>
