@@ -1,0 +1,1749 @@
+/* ============================================================
+   Pedalling Pizza Palace
+   Clean slate. Foundations + header/footer only.
+   Brand direction (color, type, layout) gets built per section.
+   ============================================================ */
+
+:root {
+  /* Color-led palette: bold flat blocks (YRS TRULY direction). */
+  /* Ink on warm fields; off-white paper; saturated brand blocks. */
+  --paper: #f7f1e4; /* warm off-white, the page base between blocks */
+  --bg: #f7f1e4; /* alias for paper */
+  --text: #1a1714; /* near-black ink, faint warm cast */
+  --muted: #5c544a; /* secondary ink, clears 4.5:1 on paper/marigold */
+  --line: #1a1714; /* brutalist rules are ink, not light gray */
+  --accent: #1a1714; /* default solid (ink); brand blocks below carry color */
+
+  /* ---- Brand color blocks (semantic roles) ----
+     Three named palettes feed these roles; switch with
+     <html data-palette="marigold | pastel | italian">.
+     --block-1: primary heading field
+     --block-2: image field
+     --frame:   framed-image border + accents
+     --block-1-ink / --block-2-ink: readable text on those blocks */
+  --block-1: #f0a829;
+  --block-1-ink: #1a1714;
+  --block-2: #20407a;
+  --block-2-ink: #f7f1e4;
+  --frame: #d6431f;
+  --olive: #b5c34a;
+
+  /* Back-compat aliases (older rules referenced these) */
+  --marigold: var(--block-1);
+  --inkblue: var(--block-2);
+  --tomato: var(--frame);
+  --on-blue: var(--block-2-ink);
+
+  /* ---- Foundation tokens (palette-independent) ---- */
+  --shell: min(1180px, calc(100% - 40px));
+
+  /* Type: Three-Voice Rule: serif (display), sans (body), mono (labels) */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Z-index scale */
+  --z-sticky: 100;
+  --z-overlay: 300;
+
+  /* Motion */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Palette A: Pastel (candy pink / mint / lilac / electric yellow) */
+:root[data-palette="pastel"] {
+  --paper: #fbf7ff;
+  --bg: #fbf7ff;
+  --text: #2a2350;
+  --muted: #5b5285;
+  --line: #2a2350;
+  --accent: #ff5bbf; /* candy pink */
+
+  --block-1: #b6e3c6; /* mint green heading field */
+  --block-1-ink: #2a2350;
+  --block-2: #c9b8f5; /* lilac image field */
+  --block-2-ink: #2a2350;
+  --frame: #ff5bbf; /* candy pink frame */
+  --olive: #ffe14d; /* electric yellow accent */
+}
+
+/* Palette B: Italian (blue / green / red / white / black) */
+:root[data-palette="italian"] {
+  --paper: #f6f4ef;
+  --bg: #f6f4ef;
+  --text: #14130f; /* near-black */
+  --muted: #4d4b44;
+  --line: #14130f;
+  --accent: #c8102e; /* italian red */
+
+  --block-1: #008c45; /* italian green heading field */
+  --block-1-ink: #f6f4ef;
+  --block-2: #0a3a8f; /* italian blue image field */
+  --block-2-ink: #f6f4ef;
+  --frame: #c8102e; /* italian red frame */
+  --olive: #008c45;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+main {
+  min-height: 60vh;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- Header (YRS TRULY direction: celled bar, hard ink rules) ----------
+   A full-width bar on paper. The serif wordmark sits in its own cell on the
+   left; every nav item is its own cell, divided by 1px ink rules. Hovering a
+   cell fills it (ink fill, paper text). The cells light up, not underlines. */
+.site-header {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: clamp(0.7rem, 0.4rem + 0.8vw, 1.1rem)
+    max(calc((100vw - var(--shell)) / 2), 1.25rem);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.15rem, 0.7rem + 1.5vw, 1.85rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.nav {
+  display: flex;
+  align-items: stretch;
+  flex: 0 0 auto;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 clamp(0.9rem, 0.5rem + 1.2vw, 1.9rem);
+  border-left: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Each nav cell owns its left divider; the brand cell carries no border,
+   so every seam (brand|Event, Event|Om oss, ... |Boka oss) is one line. */
+
+.nav-link:not(.nav-cta):hover {
+  background: var(--text);
+  color: var(--paper);
+}
+
+.nav-cta {
+  background: var(--olive);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.nav-cta:hover {
+  background: var(--text);
+  color: var(--paper);
+}
+
+/* ---------- Hamburger toggle (mobile only) ---------- */
+.nav-toggle {
+  display: none; /* shown in the <=760px query */
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: clamp(3.5rem, 14vw, 4.25rem);
+  padding: 0;
+  background: var(--olive);
+  border: 0;
+  border-left: 1px solid var(--line);
+  cursor: pointer;
+  color: var(--text);
+}
+
+.nav-toggle__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 26px;
+}
+
+.nav-toggle__bars span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--text);
+}
+
+.nav-toggle:hover {
+  background: var(--text);
+}
+
+.nav-toggle:hover .nav-toggle__bars span {
+  background: var(--paper);
+}
+
+/* ---------- Full-viewport candy-block menu modal ---------- */
+.nav-locked {
+  overflow: hidden;
+}
+
+.nav-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  /* Slide-down + fade; the JS toggles .is-open. */
+  opacity: 0;
+  transform: translateY(-1.5rem);
+  /* While closed the panel must not swallow clicks meant for the page
+     (including the hamburger). pointer-events is re-enabled when open. */
+  pointer-events: none;
+  transition:
+    opacity 0.32s var(--ease-out-quint),
+    transform 0.32s var(--ease-out-quint);
+}
+
+/* [hidden] must win over display:flex so the closed modal is fully removed. */
+.nav-modal[hidden] {
+  display: none;
+}
+
+.nav-modal.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.nav-modal__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  padding: clamp(1rem, 0.7rem + 1.5vw, 1.4rem)
+    max(calc((100vw - var(--shell)) / 2), 1.25rem);
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-modal__brand {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1rem, 0.8rem + 1vw, 1.3rem);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--text);
+  max-width: 9ch;
+}
+
+.nav-modal__close {
+  flex: 0 0 auto;
+  padding: 0.55rem 1rem;
+  background: var(--text);
+  color: var(--paper);
+  border: 0;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.nav-modal__links {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.nav-modal__link {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1rem, 0.6rem + 2vw, 1.8rem);
+  flex: 1 1 0;
+  min-height: 0;
+  padding: clamp(1.25rem, 0.8rem + 3vw, 2.4rem)
+    max(calc((100vw - var(--shell)) / 2), 1.5rem);
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  text-decoration: none;
+  /* Staggered entrance: each link rises in after the panel opens. */
+  opacity: 0;
+  transform: translateY(1rem);
+}
+
+.nav-modal.is-open .nav-modal__link {
+  animation: nav-link-rise 0.5s var(--ease-out-quint) both;
+  animation-delay: calc(0.12s + var(--i) * 0.06s);
+}
+
+.nav-modal__link[data-tone="mint"] {
+  background: var(--block-1);
+}
+.nav-modal__link[data-tone="lilac"] {
+  background: var(--block-2);
+}
+.nav-modal__link[data-tone="yellow"] {
+  background: var(--olive);
+}
+.nav-modal__link[data-tone="pink"] {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.nav-modal__link:last-child {
+  border-bottom: 0;
+}
+
+.nav-modal__index {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 0.7rem + 0.5vw, 1rem);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.nav-modal__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 1.2rem + 7vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.nav-modal__link:hover .nav-modal__label {
+  font-style: italic;
+}
+
+@keyframes nav-link-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-modal {
+    transition: opacity 0.2s ease;
+    transform: none;
+  }
+  .nav-modal.is-open .nav-modal__link {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: clamp(2rem, 1.5rem + 2vw, 3rem)
+    max(calc((100vw - var(--shell)) / 2), 1.25rem)
+    clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  margin-top: 0;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.site-footer strong {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.site-footer p {
+  max-width: 360px;
+  margin: 4px 0 0;
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.9rem;
+}
+
+.copyright {
+  font-size: 0.85rem;
+}
+
+/* ---------- Buttons ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 1.7rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  cursor: pointer;
+  transition:
+    transform 0.4s var(--ease-out-quint),
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.button {
+  border-radius: 0;
+}
+
+.button.primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.button.primary:hover {
+  background: var(--muted);
+}
+
+.button.ghost {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.button.ghost:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* ---------- Hero ----------
+   Full-width 2-col grid. Left column splits into two rows
+   (heading box + actions box); right column (image) spans both rows.
+   Every cell is its own flat color, divided by ink rules. */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "media  head"
+    "media  acts";
+  /* Fit the visible viewport (minus the header) so the actions row stays
+     above the fold. Capped so it never gets absurdly tall on big screens. */
+  height: min(calc(100svh - var(--header-h, 88px)), 760px);
+  border-bottom: 1px solid var(--text);
+}
+
+.hero-cell {
+  display: flex;
+}
+
+.hero-cell--head {
+  grid-area: head;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--block-1);
+  color: var(--block-1-ink);
+  padding: clamp(2rem, 1rem + 3vw, 3.4rem) clamp(2rem, 1rem + 3vw, 4.5rem);
+}
+
+.hero-cell--actions {
+  grid-area: acts;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  background: var(--paper);
+  border-top: 1px solid var(--text);
+  padding: clamp(1.4rem, 1rem + 1.6vw, 2.2rem) clamp(2rem, 1rem + 3vw, 4.5rem);
+}
+
+.hero-cell--media {
+  grid-area: media;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background: var(--block-2);
+  border-right: 1px solid var(--text);
+  padding: clamp(1.5rem, 1rem + 2.5vw, 3rem);
+  /* Don't let the tall collage stretch the grid (which would push the
+     actions row below the fold). The cell takes the head+acts height and
+     clips any overflow of the image stack. */
+  min-height: 0;
+  overflow: clip;
+}
+
+/* Mono meta tag: wayfinding texture (year + cities), not a promo eyebrow.
+   Sits as a small tracked marker, anchored to the cell, never centered. */
+.hero-meta {
+  margin: 0 0 clamp(1.2rem, 0.9rem + 1vw, 2rem);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--block-1-ink);
+  opacity: 0.75;
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 0.6rem + 6.2vw, 5.4rem);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  color: var(--block-1-ink);
+  overflow-wrap: break-word;
+}
+
+/* The manual <br> controls the two lines; keep each half whole so the
+   headline never staggers mid-phrase. */
+.hero-line {
+  white-space: nowrap;
+}
+
+.hero h1 em {
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Forced line break in the headline on wider screens; hidden below 680px
+   (the adjacent space remains) so the headline wraps naturally instead of
+   overflowing. */
+.hero-break {
+  display: inline;
+}
+
+.hero-lead {
+  max-width: 40ch;
+  margin: clamp(1.4rem, 1rem + 1.4vw, 2rem) 0 0;
+  font-size: clamp(1.02rem, 0.95rem + 0.35vw, 1.22rem);
+  line-height: 1.5;
+  color: var(--block-1-ink);
+  text-wrap: pretty;
+}
+
+
+/* Collage: two framed photos stacked, the lower one tilted and overlapping
+   upward, like pinned prints. */
+.hero-collage {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  margin-top: clamp(1.5rem, 1rem + 3vw, 3.5rem);
+  padding-bottom: clamp(1.5rem, 1rem + 3vw, 3.5rem);
+}
+
+/* Framed image: a thick contrasting border, like a postcard object */
+.hero-frame {
+  margin: 0;
+  width: 100%;
+  padding: clamp(10px, 1.4vw, 18px);
+  background: var(--frame);
+  border: 1px solid var(--text);
+}
+
+.hero-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 1px solid var(--text);
+}
+
+/* Lower print: narrower, tilted, pulled up to overlap the top frame,
+   nudged right and lifted above it with its own ink edge. */
+.hero-frame--tilt {
+  position: relative;
+  z-index: 2;
+  width: 56%;
+  margin: -14% 0 0 auto;
+  margin-right: clamp(0px, 2vw, 28px);
+  background: var(--block-1);
+  transform: rotate(3.5deg);
+  box-shadow: 0 10px 24px rgba(42, 35, 80, 0.18);
+}
+
+.hero-frame--tilt img {
+  aspect-ratio: 4 / 3;
+}
+
+.hero-frame--top {
+  position: relative;
+  z-index: 1;
+}
+
+/* Restrained entrance: a single quiet rise on the inner content.
+   The tilted frame is excluded. Its rotate() must not be clobbered by the
+   animation's transform; it gets its own rise that preserves the tilt. */
+.hero-meta,
+.hero h1,
+.hero-lead,
+.hero-cell--actions .button,
+.hero-frame--top {
+  animation: hero-rise 0.8s var(--ease-out-quint) both;
+}
+
+.hero-frame--tilt {
+  animation: hero-rise-tilt 0.8s var(--ease-out-quint) both;
+  animation-delay: 0.3s;
+}
+
+@keyframes hero-rise-tilt {
+  from { opacity: 0; transform: translateY(16px) rotate(3.5deg); }
+  to { opacity: 1; transform: translateY(0) rotate(3.5deg); }
+}
+.hero-meta { animation-delay: 0s; }
+.hero h1 { animation-delay: 0.08s; }
+.hero-lead { animation-delay: 0.2s; }
+.hero-cell--actions .button { animation-delay: 0.34s; }
+.hero-frame--top { animation-delay: 0.18s; }
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Shared section frame ---------- */
+.menu,
+.cities,
+.press,
+.closing,
+.socials {
+  width: 100%;
+  padding: clamp(3rem, 1.5rem + 5vw, 6rem)
+    max(calc((100vw - var(--shell)) / 2), 1.5rem);
+  border-bottom: 1px solid var(--text);
+}
+
+.show {
+  border-bottom: 1px solid var(--text);
+}
+
+.concept h2,
+.menu-title,
+.cities h2,
+.press h2,
+.closing h2,
+.about h2,
+.socials h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+/* ---------- Concept (core pitch, told once) ----------
+   Full-bleed split: fire photo fills the left, the pitch sits on yellow.
+   Broken-grid: the text column is the wider, dominant half. */
+.concept {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  background: var(--olive);
+  color: var(--text);
+  border-bottom: 1px solid var(--text);
+}
+
+.concept-media {
+  align-self: stretch;
+  overflow: clip;
+  border-right: 1px solid var(--text);
+  min-height: 360px;
+}
+
+.concept-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.concept-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1rem, 0.7rem + 1vw, 1.5rem);
+  padding: clamp(2.5rem, 1.5rem + 4vw, 5rem)
+    clamp(2rem, 1rem + 3vw, 4.5rem)
+    clamp(2.5rem, 1.5rem + 4vw, 5rem)
+    clamp(2rem, 1rem + 3vw, 4rem);
+}
+
+.concept h2 {
+  margin: 0;
+  max-width: 16ch;
+  font-size: clamp(2rem, 1rem + 3.4vw, 3.4rem);
+  line-height: 1;
+  color: var(--text);
+  overflow-wrap: break-word;
+}
+
+.concept p {
+  margin: 0;
+  max-width: 52ch;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--text);
+  opacity: 0.92;
+}
+
+/* ---------- Menu (the pizzas) ----------
+   A manifesto, not a list. Each pizza is an oversized statement: the name
+   set huge as the hero, the watercolor sign a supporting block on the left,
+   the description a narrow column beside it. */
+.menu {
+  background: var(--paper);
+  color: var(--text);
+  padding-block: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+}
+
+.menu-title {
+  margin: 0;
+  font-size: clamp(2rem, 1rem + 3.4vw, 3.6rem);
+  line-height: 0.95;
+}
+
+.menu-note {
+  margin: 0.6rem 0 clamp(1.5rem, 1rem + 2vw, 2.75rem);
+  max-width: 46ch;
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--text);
+}
+
+/* Grid: index | sign | name+desc. The sign is the narrow supporting
+   column; the name spans the wide column and carries the row. */
+.menu-item {
+  display: grid;
+  grid-template-columns: auto minmax(110px, 0.22fr) minmax(0, 1fr);
+  grid-template-areas:
+    "index sign name"
+    "index sign desc";
+  align-items: center;
+  column-gap: clamp(1.25rem, 0.8rem + 2.4vw, 3rem);
+  row-gap: clamp(0.5rem, 0.35rem + 0.5vw, 0.9rem);
+  padding: clamp(1.5rem, 1rem + 2vw, 2.75rem)
+    clamp(1.25rem, 0.85rem + 2vw, 2.6rem);
+  border-bottom: 1px solid var(--text);
+}
+
+.menu-item:nth-child(1) {
+  background: var(--block-1);
+  color: var(--block-1-ink);
+}
+
+.menu-item:nth-child(2) {
+  background: var(--block-2);
+  color: var(--block-2-ink);
+}
+
+.menu-item:nth-child(3) {
+  background: var(--olive);
+  color: var(--text);
+}
+
+.menu-item:last-child {
+  border-bottom: 0;
+}
+
+.menu-index {
+  grid-area: index;
+  align-self: start;
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 0.78rem + 0.3vw, 1rem);
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+/* The name is the hero: the largest type in the block. */
+.menu-name {
+  grid-area: name;
+  align-self: end;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(2.4rem, 1.2rem + 5vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.menu-desc {
+  grid-area: desc;
+  align-self: start;
+  margin: 0;
+  max-width: 48ch;
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
+  line-height: 1.5;
+}
+
+/* Hand-painted watercolor signs support the name, not lead it. */
+.menu-sign {
+  grid-area: sign;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  overflow: visible;
+}
+
+.menu-sign img {
+  width: min(115%, 170px);
+  max-width: none;
+  height: auto;
+  margin-block: -10%;
+  object-fit: contain;
+}
+
+/* ---------- Show / Vårt erbjudande: one bold block (photo + body + CTA) ----------
+   Full-bleed split, photo on the RIGHT (mirrors concept's left photo to break
+   the grid rhythm). Body sits on mint; alternates with concept's lilac. */
+.show {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  padding: 0;
+  background: var(--block-1);
+  color: var(--block-1-ink);
+}
+
+.show-photo {
+  order: 2;
+  align-self: stretch;
+  overflow: clip;
+  border-left: 1px solid var(--text);
+  min-height: 340px;
+}
+
+.show-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left 40%;
+}
+
+.show-body {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1rem, 0.7rem + 1vw, 1.6rem);
+  padding: clamp(2.5rem, 1.5rem + 4vw, 5rem)
+    clamp(2rem, 1rem + 3vw, 4rem)
+    clamp(2.5rem, 1.5rem + 4vw, 5rem)
+    clamp(2rem, 1rem + 3vw, 4.5rem);
+}
+
+.show-body h2 {
+  margin: 0;
+  max-width: 14ch;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 1rem + 3.4vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--block-1-ink);
+  overflow-wrap: break-word;
+}
+
+.show-body p {
+  margin: 0;
+  max-width: 46ch;
+  font-size: clamp(1.02rem, 0.95rem + 0.35vw, 1.18rem);
+  line-height: 1.55;
+  color: var(--block-1-ink);
+}
+
+.show-note {
+  font-family: var(--font-mono);
+  font-size: 0.82rem !important;
+  letter-spacing: 0.01em;
+  line-height: 1.5 !important;
+  opacity: 0.85;
+}
+
+.show-body .button.primary,
+.concept-body .button.primary {
+  align-self: flex-start;
+  margin-top: 0.4rem;
+  background: var(--text);
+  color: var(--paper);
+}
+
+.show-body .button.primary:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* ---------- Cities (SEO strip into /event/*) ---------- */
+.cities {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 1rem clamp(1.5rem, 1rem + 2vw, 3rem);
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.cities h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem);
+  color: var(--paper);
+}
+
+.cities-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.cities-list span {
+  display: inline-flex;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.city-tag--mint {
+  background: var(--block-1);
+  color: var(--block-1-ink);
+}
+
+.city-tag--lilac {
+  background: var(--block-2);
+  color: var(--block-2-ink);
+}
+
+.city-tag--yellow {
+  background: var(--olive);
+  color: var(--text);
+}
+
+.cities p {
+  grid-column: 2;
+  max-width: 54ch;
+  margin: -0.35rem 0 0;
+  color: var(--paper);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+  line-height: 1.45;
+}
+
+/* ---------- Press (real mentions, outbound cards) ---------- */
+.press {
+  background: var(--paper);
+}
+
+.press > h2 {
+  margin: 0 0 clamp(1.6rem, 1rem + 2vw, 2.6rem);
+  font-size: clamp(2rem, 1rem + 3.4vw, 3.4rem);
+}
+
+.press-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  border-top: 1px solid var(--text);
+  border-left: 1px solid var(--text);
+}
+
+.press-card {
+  border-right: 1px solid var(--text);
+  border-bottom: 1px solid var(--text);
+}
+
+.press-card a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  height: 100%;
+  padding: clamp(1.4rem, 1rem + 1.4vw, 2rem);
+  transition: background-color 0.2s ease;
+}
+
+.press-card a:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.press-outlet {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.press-card a:hover .press-outlet {
+  color: var(--paper);
+}
+
+.press-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 1rem + 0.7vw, 1.5rem);
+  line-height: 1.1;
+}
+
+.press-go {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.press-card a:hover .press-go {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Content pages ---------- */
+.page-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  min-height: min(680px, calc(100vh - 86px));
+  border-bottom: 1px solid var(--text);
+  background: var(--paper);
+}
+
+.page-hero__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1rem, 0.7rem + 1vw, 1.6rem);
+  padding: clamp(3rem, 1.5rem + 5vw, 6rem)
+    clamp(2rem, 1rem + 4vw, 5rem)
+    clamp(3rem, 1.5rem + 5vw, 6rem)
+    max(calc((100vw - var(--shell)) / 2), 1.5rem);
+}
+
+.page-hero__body h1,
+.page-band h2,
+.page-grid-section h2,
+.page-split h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.page-hero__body h1 {
+  max-width: 11ch;
+  font-size: clamp(3rem, 1rem + 8vw, 6rem);
+}
+
+.page-hero__body p,
+.page-band p,
+.page-grid-section p,
+.page-split p {
+  max-width: 58ch;
+  margin: 0;
+  font-size: clamp(1.05rem, 1rem + 0.35vw, 1.2rem);
+  line-height: 1.55;
+}
+
+.page-hero__body .button {
+  align-self: flex-start;
+  margin-top: 0.4rem;
+}
+
+.page-hero__media {
+  overflow: clip;
+  border-left: 1px solid var(--text);
+  background: var(--block-2);
+}
+
+.page-hero__media img {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.page-hero__media--portrait img {
+  object-position: center 38%;
+}
+
+.page-band,
+.page-grid-section,
+.page-split {
+  padding: clamp(3rem, 1.5rem + 5vw, 6rem)
+    max(calc((100vw - var(--shell)) / 2), 1.5rem);
+  border-bottom: 1px solid var(--text);
+}
+
+.page-band--lilac {
+  background: var(--block-2);
+  color: var(--block-2-ink);
+}
+
+.page-band--lilac h2,
+.page-band--lilac p {
+  color: var(--block-2-ink);
+}
+
+.page-band__head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  gap: clamp(1.4rem, 1rem + 3vw, 4rem);
+  align-items: start;
+}
+
+.page-band__head h2,
+.page-grid-section h2,
+.page-split h2 {
+  font-size: clamp(2rem, 1rem + 3.4vw, 3.6rem);
+}
+
+.step-list {
+  counter-reset: step;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: clamp(2rem, 1rem + 3vw, 3.4rem) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--text);
+  border-left: 1px solid var(--text);
+}
+
+.step-list li {
+  counter-increment: step;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 190px;
+  padding: clamp(1.4rem, 1rem + 1.6vw, 2.2rem);
+  border-right: 1px solid var(--text);
+  border-bottom: 1px solid var(--text);
+}
+
+.step-list li::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+}
+
+.step-list span {
+  max-width: 30ch;
+  font-size: clamp(1.05rem, 0.95rem + 0.45vw, 1.25rem);
+  line-height: 1.45;
+}
+
+.page-grid-section {
+  background: var(--paper);
+}
+
+.feature-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: clamp(2rem, 1rem + 3vw, 3.4rem) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--text);
+  border-left: 1px solid var(--text);
+}
+
+.feature-grid li {
+  min-height: 250px;
+  padding: clamp(1.4rem, 1rem + 1.5vw, 2rem);
+  border-right: 1px solid var(--text);
+  border-bottom: 1px solid var(--text);
+}
+
+.feature-grid li:nth-child(1) {
+  background: var(--block-1);
+  color: var(--block-1-ink);
+}
+
+.feature-grid li:nth-child(2) {
+  background: var(--block-2);
+  color: var(--block-2-ink);
+}
+
+.feature-grid li:nth-child(3) {
+  background: var(--olive);
+  color: var(--text);
+}
+
+.feature-grid li:nth-child(4) {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.feature-grid h3 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1rem + 1.6vw, 2.35rem);
+  line-height: 1;
+  font-style: italic;
+}
+
+.feature-grid p {
+  font-size: 1rem;
+}
+
+.page-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 1rem + 4vw, 5rem);
+}
+
+.page-split > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.page-split--yellow {
+  background: var(--olive);
+}
+
+.page-split--mint {
+  background: var(--block-1);
+  color: var(--block-1-ink);
+}
+
+/* ---------- Closing CTA ---------- */
+.closing {
+  background: var(--olive);
+  color: var(--text);
+  text-align: center;
+}
+
+.closing h2 {
+  margin: 0 auto;
+  max-width: 20ch;
+  font-size: clamp(2.2rem, 1rem + 4vw, 4rem);
+  line-height: 1;
+  color: var(--text);
+}
+
+.closing p {
+  margin: clamp(1rem, 0.8rem + 1vw, 1.6rem) auto 0;
+  max-width: 46ch;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+  line-height: 1.55;
+  opacity: 0.92;
+}
+
+.closing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: clamp(1.8rem, 1.2rem + 1.6vw, 2.6rem);
+}
+
+.closing .button.primary {
+  background: var(--text);
+  color: var(--paper);
+}
+
+/* ---------- About teaser (logo + oven photo, links to /om-oss) ----------
+   Full-bleed split: body with the brand mark on the left, oven photo right.
+   Mirrors the concept/show splits but anchored by the logo, not a heading. */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-rows: minmax(0, 1fr);
+  background: var(--block-2);
+  color: var(--block-2-ink);
+  border-bottom: 1px solid var(--text);
+}
+
+.about-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(0.75rem, 0.5rem + 0.8vw, 1.1rem);
+  padding: clamp(1.5rem, 1rem + 2vw, 2.25rem)
+    clamp(2rem, 1rem + 3vw, 4.5rem);
+}
+
+.about h2 {
+  margin: 0;
+  max-width: 18ch;
+  font-size: clamp(1.6rem, 1rem + 2vw, 2.4rem);
+  line-height: 1.05;
+  color: var(--block-2-ink);
+}
+
+.about-body p {
+  margin: 0;
+  max-width: 46ch;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.2rem);
+  line-height: 1.6;
+  opacity: 0.92;
+}
+
+.about .button.ghost {
+  border-color: var(--block-2-ink);
+  color: var(--block-2-ink);
+}
+
+.about .button.ghost:hover {
+  background: var(--block-2-ink);
+  color: var(--block-2);
+}
+
+.about-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+  background: var(--paper);
+  padding: clamp(1rem, 0.5rem + 2vw, 2rem);
+  border-left: 1px solid var(--text);
+}
+
+/* ---------- Socials ---------- */
+.socials {
+  background: var(--text);
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  text-align: center;
+}
+
+.socials h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem);
+  color: var(--paper);
+}
+
+.socials-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(0.75rem, 0.5rem + 1vw, 1.25rem);
+  margin: 0;
+  padding: 0;
+}
+
+.socials-list a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(3.5rem, 2.5rem + 3vw, 4.5rem);
+  height: clamp(3.5rem, 2.5rem + 3vw, 4.5rem);
+  border: 1px solid var(--text);
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.socials-list a:hover {
+  transform: translateY(-3px);
+}
+
+.socials-list svg {
+  width: 55%;
+  height: 55%;
+}
+
+.social--instagram {
+  background: var(--block-2);
+  color: var(--block-2-ink);
+}
+
+.social--facebook {
+  background: var(--block-1);
+  color: var(--block-1-ink);
+}
+
+.social--tiktok {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* ---------- Motion safety ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .hero h1,
+  .hero-lead,
+  .hero-cell--actions .button,
+  .hero-frame--top {
+    opacity: 1;
+    transform: none;
+  }
+  .hero-frame--tilt {
+    opacity: 1;
+    transform: rotate(3.5deg);
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+/* Hero keeps its two-column split longer than the other sections: it has
+   room down to ~880px. Stacking it earlier (at 1024px) left a tall mint
+   field with a half-empty right side. Below 880px it stacks type-first. */
+@media (max-width: 880px) {
+  /* Stack the cells: head (with actions), then image. */
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas:
+      "head"
+      "acts"
+      "media";
+    height: auto;
+    min-height: 0;
+  }
+
+  .hero-cell {
+    border-right: 0;
+  }
+
+  .hero-cell--head {
+    min-width: 0;
+    justify-content: flex-start;
+    padding: clamp(2rem, 1.5rem + 4vw, 3.5rem) var(--gp)
+      clamp(1.6rem, 1.2rem + 2vw, 2.4rem);
+    --gp: max(calc((100vw - var(--shell)) / 2), 1.25rem);
+  }
+
+  /* Stacked: the headline grows to fill the now full-width cell so the mint
+     field doesn't read as half-empty. Lead caps at a comfortable measure. */
+  .hero h1 {
+    font-size: clamp(3rem, 1rem + 8vw, 4.6rem);
+  }
+
+  .hero-lead {
+    max-width: 52ch;
+  }
+
+  /* Actions ride the same mint field as the headline so the CTA reads as
+     part of the statement, not a stranded strip. */
+  .hero-cell--actions {
+    background: var(--block-1);
+    border-top: 0;
+    padding: 0 var(--gp) clamp(2.4rem, 1.6rem + 4vw, 3.5rem);
+    --gp: max(calc((100vw - var(--shell)) / 2), 1.25rem);
+  }
+
+  .hero-cell--media {
+    justify-content: center;
+    border-top: 1px solid var(--text);
+    padding: clamp(2.5rem, 1.5rem + 5vw, 4rem) var(--gp);
+    --gp: max(calc((100vw - var(--shell)) / 2), 1.5rem);
+  }
+
+  /* Collage reads as one tidy pinned object on the lilac field: centered,
+     capped, with the tilt softened so it never sprawls or clips. */
+  .hero-collage {
+    max-width: 380px;
+    margin-inline: auto;
+    margin-top: 0;
+    padding-bottom: clamp(2rem, 1.4rem + 3vw, 3rem);
+  }
+
+  .hero-frame--tilt {
+    width: 62%;
+    margin-top: -18%;
+    margin-right: 0;
+    transform: rotate(2.5deg);
+  }
+}
+
+/* Two-column hero in the 880-1024 zone: the head column is narrow, so trim
+   the display size and let the lines wrap instead of overflowing the column. */
+@media (min-width: 881px) and (max-width: 1024px) {
+  .hero h1 {
+    font-size: clamp(2.6rem, 0.5rem + 5vw, 3.8rem);
+  }
+
+  .hero-line {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Sections: collapse the two-up layouts and the border joins.
+     Stacked = type-led: body first, photo after as a short supporting band. */
+  .concept {
+    grid-template-columns: 1fr;
+  }
+
+  .concept-body {
+    order: 0;
+  }
+
+  .concept-media {
+    order: 1;
+    border-right: 0;
+    border-top: 1px solid var(--text);
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .about-body {
+    order: 0;
+  }
+
+  .about-media {
+    order: 1;
+    height: auto;
+    border-left: 0;
+    border-top: 1px solid var(--text);
+    aspect-ratio: 16 / 9;
+  }
+
+  .menu-list,
+  .press-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile: drop the watercolor signs; the row is type only. */
+  .menu-item {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "index"
+      "name"
+      "desc";
+    align-items: start;
+    justify-items: start;
+    row-gap: 0.5rem;
+    padding: clamp(1.5rem, 1rem + 3vw, 2rem) clamp(1.25rem, 1rem + 2vw, 1.75rem);
+    border-right: 0;
+    border-bottom: 1px solid var(--text);
+  }
+
+  .menu-name {
+    align-self: start;
+    font-size: clamp(2rem, 1.4rem + 4vw, 2.8rem);
+  }
+
+  .menu-desc {
+    margin-top: 0.25rem;
+  }
+
+  .menu-sign {
+    display: none;
+  }
+
+  .menu-item:last-child {
+    border-bottom: 0;
+  }
+
+  /* Show block: stack body over photo (type-led; photo is a supporting band) */
+  .show {
+    grid-template-columns: 1fr;
+  }
+
+  .show-body {
+    order: 0;
+  }
+
+  .show-photo {
+    order: 1;
+    border-left: 0;
+    border-top: 1px solid var(--text);
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .show-body {
+    padding: clamp(2rem, 1.5rem + 4vw, 3.5rem) var(--gp);
+    --gp: max(calc((100vw - var(--shell)) / 2), 1.5rem);
+  }
+
+  .page-hero,
+  .page-band__head,
+  .page-split {
+    grid-template-columns: 1fr;
+  }
+
+  .page-hero {
+    min-height: 0;
+  }
+
+  .page-hero__body {
+    padding: clamp(2.4rem, 1.5rem + 5vw, 4rem) var(--gp);
+    --gp: max(calc((100vw - var(--shell)) / 2), 1.5rem);
+  }
+
+  .page-hero__media {
+    border-left: 0;
+    border-top: 1px solid var(--text);
+  }
+
+  .page-hero__media img {
+    min-height: 260px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .step-list,
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .step-list li,
+  .feature-grid li {
+    min-height: 0;
+  }
+
+  .cities {
+    grid-template-columns: 1fr;
+  }
+
+  .cities p {
+    grid-column: auto;
+    margin-top: -0.2rem;
+  }
+}
+
+@media (max-width: 680px) {
+  /* Display type stays the hero: keep it large and let it wrap, never
+     shrink it to body size. */
+  .hero h1 {
+    font-size: clamp(2.4rem, 1.4rem + 8vw, 3.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    overflow-wrap: break-word;
+  }
+
+  .hero-lead {
+    max-width: none;
+    overflow-wrap: break-word;
+  }
+
+  /* Keep the forced break so the two phrases stay on their own lines
+     (otherwise they crash together as "hjul,rakt"). */
+  .hero-break {
+    display: inline;
+  }
+
+  /* Let each half wrap if a line is still too wide for the phone, but the
+     manual break keeps the two phrases apart. */
+  .hero-line {
+    white-space: normal;
+  }
+}
+
+/* Nav: the full set of cells stops fitting on small screens. Drop the
+   inline nav entirely and surface a hamburger that opens the candy-block
+   menu modal (all links live there). */
+@media (max-width: 760px) {
+  .nav {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .wordmark {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,120 @@
+---
+// YRS-TRULY-direction header: a stacked serif wordmark in its own cell,
+// then each nav item lives in its own cell divided by hard ink rules.
+// On small screens the cells collapse to a hamburger that opens a
+// full-viewport candy-block menu modal.
+const links = [
+  { href: "/event", label: "Event", tone: "mint" },
+  { href: "/om-oss", label: "Om oss", tone: "lilac" },
+  { href: "/kontakt", label: "Kontakt", tone: "yellow" },
+];
+---
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Pedalling Pizza Palace, hem">
+    <span class="wordmark">Pedalling<br />Pizza Palace</span>
+  </a>
+
+  <nav class="nav" aria-label="Huvudnavigation">
+    {
+      links.map((link) => (
+        <a class="nav-link" href={link.href}>
+          {link.label}
+        </a>
+      ))
+    }
+    <a class="nav-link nav-cta" href="/kontakt">Boka oss</a>
+  </nav>
+
+  <button
+    class="nav-toggle"
+    type="button"
+    aria-label="Öppna meny"
+    aria-expanded="false"
+    aria-controls="nav-modal"
+  >
+    <span class="nav-toggle__bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+    </span>
+  </button>
+</header>
+
+<div class="nav-modal" id="nav-modal" hidden>
+  <div class="nav-modal__bar">
+    <a class="nav-modal__brand" href="/">Pedalling Pizza Palace</a>
+    <button class="nav-modal__close" type="button" aria-label="Stäng meny">
+      <span aria-hidden="true">Stäng</span>
+    </button>
+  </div>
+
+  <nav class="nav-modal__links" aria-label="Meny">
+    {
+      links.map((link, i) => (
+        <a
+          class="nav-modal__link"
+          href={link.href}
+          data-tone={link.tone}
+          style={`--i:${i}`}
+        >
+          <span class="nav-modal__index">{`0${i + 1}`}</span>
+          <span class="nav-modal__label">{link.label}</span>
+        </a>
+      ))
+    }
+    <a
+      class="nav-modal__link nav-modal__link--cta"
+      href="/kontakt"
+      data-tone="pink"
+      style={`--i:${links.length}`}
+    >
+      <span class="nav-modal__index">{`0${links.length + 1}`}</span>
+      <span class="nav-modal__label">Boka oss</span>
+    </a>
+  </nav>
+</div>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+  const modal = document.querySelector<HTMLElement>(".nav-modal");
+  const closeBtn = modal?.querySelector<HTMLButtonElement>(".nav-modal__close");
+
+  if (toggle && modal && closeBtn) {
+    const open = () => {
+      modal.hidden = false;
+      // next frame so the [hidden] removal paints before the open class
+      requestAnimationFrame(() => {
+        modal.classList.add("is-open");
+        document.documentElement.classList.add("nav-locked");
+        toggle.setAttribute("aria-expanded", "true");
+        closeBtn.focus();
+      });
+    };
+
+    const close = () => {
+      modal.classList.remove("is-open");
+      document.documentElement.classList.remove("nav-locked");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.focus();
+      const onEnd = (e: TransitionEvent) => {
+        if (e.target !== modal) return;
+        modal.hidden = true;
+        modal.removeEventListener("transitionend", onEnd);
+      };
+      modal.addEventListener("transitionend", onEnd);
+      // Fallback if no transition fires (reduced motion)
+      window.setTimeout(() => {
+        if (!modal.classList.contains("is-open")) modal.hidden = true;
+      }, 450);
+    };
+
+    toggle.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+    modal.querySelectorAll(".nav-modal__link").forEach((a) =>
+      a.addEventListener("click", close),
+    );
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+    });
+  }
+</script>

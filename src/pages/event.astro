@@ -1,0 +1,130 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const eventTypes = [
+  {
+    title: "Privata fester",
+    text: "Bröllop, födelsedagar, trädgårdsfester och sena sommarkvällar där maten får bli en del av festen.",
+  },
+  {
+    title: "Företag",
+    text: "Kundevent, personalfester, kontorshäng och lanseringar där serveringen ska kännas levande, inte inhyrt på rutin.",
+  },
+  {
+    title: "Publika event",
+    text: "Festivaler, marknader, gårdsdagar och sammanhang där folk rör sig, minglar och äter löpande.",
+  },
+  {
+    title: "Workshops",
+    text: "Vill ni hellre baka själva? Vi kan hålla pizzaworkshop med deg, eld och gräddning i vår ugn.",
+  },
+];
+
+const steps = [
+  "Vi pratar datum, plats, antal gäster och vilket slags event det är.",
+  "Vi kommer dit med pizzatrucken, bygger upp serveringen och tänder ugnen.",
+  "När gästerna är hungriga bakar vi pizzorna på plats, direkt framför dem.",
+];
+---
+
+<BaseLayout
+  title="Event | Pedalling Pizza Palace"
+  description="Boka Pedalling Pizza Palace till bröllop, företagsevent, festivaler, workshops och privata fester. Mobil vedugnspizza bakad på plats."
+>
+  <section class="page-hero page-hero--event">
+    <div class="page-hero__body">
+      <h1>Boka oss till ert event</h1>
+      <p>
+        Vi kommer till platsen, eldar igång ugnen och bakar pizza medan festen
+        händer runt omkring oss. Bröllop, företagsevent, festivaler,
+        gårdsfester, vernissager, födelsedagar och allt däremellan.
+      </p>
+      <p>
+        Det enda ni behöver ha är en plats där vi kan stå. Resten pratar vi
+        ihop oss om.
+      </p>
+      <a class="button primary" href="/kontakt">Boka oss</a>
+    </div>
+    <div class="page-hero__media">
+      <picture>
+        <source type="image/avif" srcset="/images/trucks.avif" />
+        <source type="image/webp" srcset="/images/trucks.webp" />
+        <img
+          src="/images/trucks-1600.jpg"
+          alt="Två ombyggda pizzatruckar med vedugnar, parkerade på en gräsmatta"
+          width="1200"
+          height="541"
+          decoding="async"
+        />
+      </picture>
+    </div>
+  </section>
+
+  <section class="page-band page-band--lilac">
+    <div class="page-band__head">
+      <h2>Så funkar det</h2>
+      <p>
+        Det blir mat, men också något att samlas kring. Elden, degen, doften
+        och pizzorna som kommer ut en efter en.
+      </p>
+    </div>
+    <ol class="step-list">
+      {
+        steps.map((step) => (
+          <li>
+            <span>{step}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="page-grid-section">
+    <div class="page-band__head">
+      <h2>Passar för</h2>
+      <p>
+        Vi bygger upplägget efter sammanhanget. Sittande middag, fri servering,
+        många små vågor av gäster eller en kväll där pizzan är huvudnumret.
+      </p>
+    </div>
+    <ul class="feature-grid">
+      {
+        eventTypes.map((item) => (
+          <li>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="page-split page-split--yellow">
+    <div>
+      <h2>Maten</h2>
+      <p>
+        Vårt standardutbud är tre pizzor: Margherita, Diavola och Quattro
+        formaggi. Har ni andra önskemål, allergier eller en särskild idé för
+        kvällen så löser vi det i dialog.
+      </p>
+    </div>
+    <div>
+      <h2>Var vi kör</h2>
+      <p>
+        Vi utgår från Stockholm, Uppsala och Göteborg, men vi är mobila.
+        Närliggande orter och udda platser är ofta inga problem.
+      </p>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2>Skicka datum, plats och antal gäster.</h2>
+    <p>
+      Berätta vad ni planerar, så återkommer vi med upplägg och pris.
+    </p>
+    <div class="closing-actions">
+      <a class="button primary" href="/kontakt">Boka oss</a>
+      <a class="button ghost" href="/">Till startsidan</a>
+    </div>
+  </section>
+</BaseLayout>

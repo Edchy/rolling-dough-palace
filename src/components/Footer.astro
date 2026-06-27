@@ -1,0 +1,25 @@
+---
+const year = new Date().getFullYear();
+const footerLinks = [
+  { href: "/integritetspolicy", label: "Integritetspolicy" },
+  { href: "/kontakt", label: "Kontakt" },
+  { href: "https://www.instagram.com/pedallingpizzapalace", label: "Instagram" },
+];
+---
+
+<footer class="site-footer">
+  <div>
+    <strong>Pedalling Pizza Palace</strong>
+    <p>Mobil vedugnspizza för fester, företag och evenemang.</p>
+  </div>
+
+  <nav aria-label="Footer navigation">
+    {
+      footerLinks.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))
+    }
+  </nav>
+
+  <p class="copyright">&copy; {year} Pedalling Pizza Palace</p>
+</footer>

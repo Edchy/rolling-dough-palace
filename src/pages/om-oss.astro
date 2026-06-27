@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Real press mentions from the original site's article links.
+const press = [
+  {
+    outlet: "UNT",
+    title: "De driver en pizzeria på cykel med en vedugn på släp",
+    href: "https://unt.se/nyheter/ekonomi/artikel/de-driver-en-pizzeria-pa-cykel-med-en-vedugn-pa-slap/rkmyk5zj",
+  },
+  {
+    outlet: "P4 Uppland",
+    title: "Sålde 1000 pizzor på sin cykelburna pizzaugn",
+    href: "https://sverigesradio.se/artikel/salde-1000-pizzor-pa-sin-cykelburna-pizzaugn-ar-otroligt-nojda",
+  },
+  {
+    outlet: "P4 Uppland",
+    title: "Valborgsplanerna ska sälja pizza med hemmagjord cykelugn",
+    href: "https://sverigesradio.se/artikel/valborgsplanerna-ska-salja-pizza-med-hemmagjord-cykelugn",
+  },
+  {
+    outlet: "UNT",
+    title: "Möt Uppsalas cyklande pizzakollektiv",
+    href: "https://unt.se/nyheter/uppsala/artikel/tv-mot-uppsalas-cyklande-pizzakollektiv/jogomvgr",
+  },
+];
+---
+
+<BaseLayout
+  title="Om oss | Pedalling Pizza Palace"
+  description="Historien bakom Pedalling Pizza Palace: en mobil vedugnspizzeria med egenbyggda ugnar på hjul, igång sedan 2021."
+>
+  <section class="page-hero page-hero--about">
+    <div class="page-hero__body">
+      <h1>En pizzeria på hjul, byggd för hand.</h1>
+      <p>
+        Pedalling Pizza Palace är en mobil vedugnspizzeria byggd på eld, deg
+        och ganska orimliga fordon.
+      </p>
+      <p>
+        Vi började 2021 med idén att pizza inte behövde komma från en vanlig
+        restaurang. Den kunde komma rullande. Sedan dess har vi dykt upp på
+        bröllop, festivaler, företagsevent och hemmafester med våra egenbyggda
+        pizzaugnar.
+      </p>
+    </div>
+    <div class="page-hero__media page-hero__media--portrait">
+      <picture>
+        <source type="image/avif" srcset="/images/guys.avif" />
+        <source type="image/webp" srcset="/images/guys.webp" />
+        <img
+          src="/images/guys.webp"
+          alt="Två grundare framför den egenbyggda vedugnen på ett blått fordon"
+          width="900"
+          height="503"
+          decoding="async"
+        />
+      </picture>
+    </div>
+  </section>
+
+  <section class="page-split page-split--mint">
+    <div>
+      <h2>Fordon som inte beter sig</h2>
+      <p>
+        Vår lilla trupp av fordon är inte särskilt normal. Flera av dem är
+        italienska Piaggios som vi själva har hämtat hem, byggt om och gett ett
+        nytt liv som pizzamaskiner.
+      </p>
+    </div>
+    <div>
+      <h2>Ugnar vi byggt själva</h2>
+      <p>
+        Varje ugn är handbyggd av oss. Det började som ett experiment och blev
+        ett hantverk vi blivit bättre på för varje bygge.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-band page-band--lilac">
+    <div class="page-band__head">
+      <h2>Varför vi gör det</h2>
+      <p>
+        För oss är pizza mer än servering. Det är eld, rörelse, doft, väntan,
+        samtal och någon som står och bakar ut degen mitt i alltihop.
+      </p>
+      <p>
+        Vi vill att maten ska kännas som en del av festen, inte som något som
+        bara ställs fram på ett bord.
+      </p>
+    </div>
+  </section>
+
+  {/* ---------- Press: real mentions, outbound cards ---------- */}
+  <section class="press">
+    <h2>Omskrivna i</h2>
+    <ul class="press-list">
+      {
+        press.map((item) => (
+          <li class="press-card">
+            <a href={item.href} target="_blank" rel="noopener noreferrer">
+              <span class="press-outlet">{item.outlet}</span>
+              <span class="press-title">{item.title}</span>
+              <span class="press-go" aria-hidden="true">Läs artikeln</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
