@@ -1,0 +1,130 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const eventTypes = [
+  {
+    title: "Privata fester",
+    text: "Bröllop, födelsedagar, trädgårdsfester och sena sommarkvällar där maten får bli en del av festen.",
+  },
+  {
+    title: "Företag",
+    text: "Kundevent, personalfester, kontorshäng och lanseringar där serveringen ska kännas levande, inte inhyrt på rutin.",
+  },
+  {
+    title: "Publika event",
+    text: "Festivaler, marknader, gårdsdagar och sammanhang där folk rör sig, minglar och äter löpande.",
+  },
+  {
+    title: "Workshops",
+    text: "Vill ni hellre baka själva? Vi kan hålla pizzaworkshop med deg, eld och gräddning i vår ugn.",
+  },
+];
+
+const steps = [
+  "Vi pratar datum, plats, antal gäster och vilket slags event det är.",
+  "Vi kommer dit med pizzatrucken, bygger upp serveringen och tänder ugnen.",
+  "När gästerna är hungriga bakar vi pizzorna på plats, direkt framför dem.",
+];
+---
+
+<BaseLayout
+  title="Vad vi gör | Pedalling Pizza Palace"
+  description="Mobil pizzacatering med vedugn. Vi bakar napolitanska pizzor på plats till bröllop, företagsevent, festivaler, workshops och privata fester."
+>
+  <section class="event-hero event-hero--mint">
+    <h1>Vi bakar vedugnspizza där festen är.</h1>
+    <div class="event-hero__lead">
+      <p>
+        Mobil pizzacatering med vedugn. Vi kommer till platsen, eldar igång
+        ugnen och bakar pizza medan festen händer runt omkring oss. Bröllop,
+        företagsevent, festivaler, gårdsfester, vernissager, födelsedagar och
+        allt däremellan.
+      </p>
+      <p>
+        Det enda ni behöver ha är en plats där vi kan stå. Resten pratar vi
+        ihop oss om.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-grid-section">
+    <div class="page-band__head">
+      <h2>Passar för</h2>
+      <p>
+        Vi bygger upplägget efter sammanhanget. Sittande middag, fri servering,
+        många små vågor av gäster eller en kväll där pizzan är huvudnumret.
+      </p>
+    </div>
+    <ul class="feature-grid">
+      {
+        eventTypes.map((item) => (
+          <li>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="page-band page-band--lilac">
+    <div class="page-band__head">
+      <h2>Så funkar det</h2>
+      <p>
+        Det blir mat, men också något att samlas kring. Elden, degen, doften
+        och pizzorna som kommer ut en efter en.
+      </p>
+    </div>
+    <ol class="step-list">
+      {
+        steps.map((step) => (
+          <li>
+            <span>{step}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="colour-pair">
+    <div class="colour-pair__cell colour-pair__cell--mint">
+      <h2>
+        <span
+          class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--fresh"
+          aria-hidden="true"></span>Maten
+      </h2>
+      <p>
+        Vi bakar napolitanska pizzor i vedugn. Vårt standardutbud är tre sorter:
+        Margherita, Diavola och Quattro formaggi. Har ni andra önskemål,
+        allergier eller en särskild idé för kvällen så löser vi det i dialog.
+      </p>
+    </div>
+    <div class="colour-pair__cell colour-pair__cell--pink">
+      <h2>
+        <span
+          class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--route"
+          aria-hidden="true"></span>Var vi kör
+      </h2>
+      <p>
+        Vi utgår från Stockholm, Uppsala och Göteborg, men vi är mobila.
+        Närliggande orter och udda platser är ofta inga problem.
+      </p>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2>
+      <span
+        class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--rolling-pin"
+        aria-hidden="true"></span>Hör av er. Vi fixar resten.
+    </h2>
+    <p>
+      Släng iväg datum, plats och typ hur många ni blir. Vi hör av oss med
+      upplägg och vad det går loss på.
+    </p>
+    <div class="closing-actions">
+      <a class="button primary" href="/kontakt">Boka oss</a>
+      <a class="button ghost" href="/">Till startsidan</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -24,7 +24,7 @@ Avoid overloaded Wix-style navigation, generic beige restaurant templates, stock
 
 - Put booking intent first.
 - Keep the primary navigation short enough to scan in one glance.
-- Preserve city pages for SEO, but group them under the relevant service.
+- Name the cities served within the service page rather than as separate pages.
 - Use food and event imagery as the main emotional proof once real assets are available.
 - Let the tone feel handmade and direct rather than corporate.
 
@@ -36,11 +36,11 @@ The original Wix site sprawled across ~16 pages that mostly repeat one pitch (mo
 
 Pages:
 - `/` Home: leads with the foodtruck identity; orients rather than repeating the full pitch.
-- `/event` The one service page: the offering plus all use-cases (festival/public, privat fest, företag, workshops) as sections. City pages nest under it for SEO: `/event/stockholm`, `/event/uppsala`, `/event/goteborg`.
+- `/event` The one service page: the offering plus all use-cases (festival/public, privat fest, företag, workshops) as sections. The page is labelled "Vad vi gör" in the nav; the slug stays `/event`. No separate per-city pages (the cities are named in the "Var vi kör" section instead).
 - `/om-oss` The story: how it began (2021), the self-built bike-ovens, the cykel identity, and the people behind the vagn. This is where the bohemian, handmade brand voice lives.
 - `/kontakt` Contact and booking (merges the old /boka, /bokafoodtruck, /contact paths).
 
-Nav (short): Event, Om oss, Kontakt, plus a "Boka oss" CTA. No "Artiklar" item; no separate Catering/Företag.
+Nav (short): Vad vi gör, Om oss, Kontakt, plus a "Boka oss" CTA. No "Artiklar" item; no separate Catering/Företag.
 
 Workshops were a real offering on the original site; they live as a section on `/event`, not a separate page, to keep the nav short.
 

@@ -1,25 +1,59 @@
 ---
 const year = new Date().getFullYear();
 const footerLinks = [
-  { href: "/integritetspolicy", label: "Integritetspolicy" },
-  { href: "/kontakt", label: "Kontakt" },
-  { href: "https://www.instagram.com/pedallingpizzapalace", label: "Instagram" },
+  { href: "/catering", label: "Catering", tone: "mint" },
+  { href: "/om-oss", label: "Om", tone: "lilac" },
+  { href: "/kontakt", label: "Kontakt", tone: "yellow" },
+  {
+    href: "/kontakt",
+    label: "Boka",
+    tone: "pink",
+  },
 ];
 ---
 
 <footer class="site-footer">
-  <div>
-    <strong>Pedalling Pizza Palace</strong>
-    <p>Mobil vedugnspizza för fester, företag och evenemang.</p>
+  <div class="footer-cell footer-cell--brand">
+    <a
+      class="footer-wordmark"
+      href="/"
+      aria-label="Pedalling Pizza Palace, hem"
+    >
+      Pedalling<br />Pizza<br />Palace
+    </a>
+    <p>
+      En foodtruck med napolitansk vedugnspizza, redo att rulla in vart ni
+      vill.
+    </p>
+    <p class="footer-slogan">Vår deg mot er deg.</p>
   </div>
 
-  <nav aria-label="Footer navigation">
+  <div class="footer-cell footer-cell--booking">
+    <span class="glyph-mark footer-booking-mark footer-booking-mark--pedals" aria-hidden="true"></span>
+    <span class="glyph-mark footer-booking-mark footer-booking-mark--pizza" aria-hidden="true"></span>
+    <span class="glyph-mark footer-booking-mark footer-booking-mark--castle" aria-hidden="true"></span>
+  </div>
+
+  <div class="footer-cell footer-cell--details">
+    <p>Stockholm, Uppsala, Göteborg och vägarna däremellan.</p>
+  </div>
+
+  <nav class="footer-cell footer-cell--nav" aria-label="Footer navigation">
     {
       footerLinks.map((link) => (
-        <a href={link.href}>{link.label}</a>
+        <a class="footer-link" href={link.href} data-tone={link.tone}>
+          {link.label}
+        </a>
       ))
     }
   </nav>
 
-  <p class="copyright">&copy; {year} Pedalling Pizza Palace</p>
+  <div class="footer-cell footer-cell--legal">
+    <p class="footer-privacy">
+      Vi sparar bara det ni skickar i formuläret för att svara med en offert,
+      och delar det aldrig vidare. Vill ni att vi raderar era uppgifter, mejla{" "}
+      <a href="mailto:pedallingpizzapalace@gmail.com">pedallingpizzapalace@gmail.com</a>.
+    </p>
+    <span>&copy; {year}</span>
+  </div>
 </footer>

@@ -23,72 +23,134 @@ const press = [
     title: "Möt Uppsalas cyklande pizzakollektiv",
     href: "https://unt.se/nyheter/uppsala/artikel/tv-mot-uppsalas-cyklande-pizzakollektiv/jogomvgr",
   },
+  {
+    outlet: "Svensk Damtidning",
+    title: "Kockarna om Victorias privata middagsbesök. Därför kunde hon inte äta",
+    href: "https://www.svenskdam.se/kungligt/kockarna-om-victorias-privata-middagsbesok-darfor-kunde-hon-inte-ata/8683933",
+  },
+  {
+    outlet: "Svensk Damtidning",
+    title: "Victorias dolda sjukdom. Maten hon inte kan äta",
+    href: "https://www.svenskdam.se/kungligt/victorias-dolda-sjukdom-maten-hon-inte-kan-ata-har-lart-oss/8687550",
+  },
 ];
 ---
 
 <BaseLayout
   title="Om oss | Pedalling Pizza Palace"
-  description="Historien bakom Pedalling Pizza Palace: en mobil vedugnspizzeria med egenbyggda ugnar på hjul, igång sedan 2021."
+  description="Historien bakom Pedalling Pizza Palace: mobil pizzacatering med vedugn och egenbyggda ugnar på hjul, igång sedan 2021."
 >
-  <section class="page-hero page-hero--about">
-    <div class="page-hero__body">
-      <h1>En pizzeria på hjul, byggd för hand.</h1>
+  <section class="event-hero event-hero--lilac">
+    <h1>Mobil vedugnspizzeria sedan 2021.</h1>
+    <div class="event-hero__lead">
       <p>
-        Pedalling Pizza Palace är en mobil vedugnspizzeria byggd på eld, deg
-        och ganska orimliga fordon.
+        Pedalling Pizza Palace har sedan 2021 dykt upp på alltifrån bröllop och
+        musikfestivaler till företagsevent och hemmafester.
       </p>
       <p>
-        Vi började 2021 med idén att pizza inte behövde komma från en vanlig
-        restaurang. Den kunde komma rullande. Sedan dess har vi dykt upp på
-        bröllop, festivaler, företagsevent och hemmafester med våra egenbyggda
-        pizzaugnar.
+        Allt gör vi själva för hand. Vi bygger våra egna ugnar, gör vår egen
+        deg och bakar napolitanska pizzor med kvalitet framför kvantitet.
       </p>
     </div>
-    <div class="page-hero__media page-hero__media--portrait">
-      <picture>
-        <source type="image/avif" srcset="/images/guys.avif" />
-        <source type="image/webp" srcset="/images/guys.webp" />
+  </section>
+
+  <section class="om-photo">
+    <picture>
+      <source type="image/avif" srcset="/images/hero-1920.avif" />
+      <source type="image/webp" srcset="/images/hero-1920.webp" />
+      <img
+        src="/images/hero-1600.jpg"
+        alt="Pedalling Pizza Palace på plats med fordon och vedugn"
+        width="1600"
+        height="523"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+  </section>
+
+  <section class="colour-pair">
+    <div class="colour-pair__cell colour-pair__cell--mint">
+      <h2>
+        <span
+          class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--pedals"
+          aria-hidden="true"></span>Fordonen
+      </h2>
+      <p>
+        Vår trupp av fordon är alla sig olika. De flesta av dem från Italien. Vi
+        har nämligen åkt ner med lastbil från Sverige och köpt diverse Piaggios,
+        lastat på dem och fraktat hem dem.
+      </p>
+    </div>
+    <div class="colour-pair__cell colour-pair__cell--pink">
+      <h2>
+        <span
+          class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--flipper"
+          aria-hidden="true"></span>Ugnarna
+      </h2>
+      <p>
+        Pizzaugnarna på samtliga fordon är handbyggda av oss. En konst vi blivit
+        bättre på för var ugn vi bygger.
+      </p>
+    </div>
+  </section>
+
+  <section class="om-collage">
+    <div class="om-collage__inner">
+      <figure class="om-frame om-frame--a">
+        <picture>
+          <source type="image/avif" srcset="/images/trucks.avif" />
+          <source type="image/webp" srcset="/images/trucks.webp" />
+          <img
+            src="/images/trucks-1600.jpg"
+            alt="Ombyggda italienska Piaggio-fordon med vedugnar"
+            width="1200"
+            height="541"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </figure>
+      <figure class="om-frame om-frame--b">
         <img
-          src="/images/guys.webp"
-          alt="Två grundare framför den egenbyggda vedugnen på ett blått fordon"
-          width="900"
-          height="503"
+          src="/images/oven-1100.jpg"
+          alt="En handbyggd vedugn på ett av fordonen"
+          width="1100"
+          height="731"
+          loading="lazy"
           decoding="async"
         />
-      </picture>
+      </figure>
     </div>
   </section>
 
-  <section class="page-split page-split--mint">
-    <div>
-      <h2>Fordon som inte beter sig</h2>
+  <section class="page-band page-band--lilac om-work">
+    <div class="page-band__head page-band__head--stack">
+      <h2>
+        <span
+          class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--pizza-flipper"
+          aria-hidden="true"></span>Så jobbar vi
+      </h2>
       <p>
-        Vår lilla trupp av fordon är inte särskilt normal. Flera av dem är
-        italienska Piaggios som vi själva har hämtat hem, byggt om och gett ett
-        nytt liv som pizzamaskiner.
+        Vi prioriterar kvalitet framför kvantitet. Schyssta råvaror, egen deg
+        och egna ugnar.
+      </p>
+      <p>
+        Allt gör vi själva för hand, från att bygga självaste pizzaugnen till
+        vår egna unika pizzadeg.
       </p>
     </div>
-    <div>
-      <h2>Ugnar vi byggt själva</h2>
-      <p>
-        Varje ugn är handbyggd av oss. Det började som ett experiment och blev
-        ett hantverk vi blivit bättre på för varje bygge.
-      </p>
-    </div>
-  </section>
-
-  <section class="page-band page-band--lilac">
-    <div class="page-band__head">
-      <h2>Varför vi gör det</h2>
-      <p>
-        För oss är pizza mer än servering. Det är eld, rörelse, doft, väntan,
-        samtal och någon som står och bakar ut degen mitt i alltihop.
-      </p>
-      <p>
-        Vi vill att maten ska kännas som en del av festen, inte som något som
-        bara ställs fram på ett bord.
-      </p>
-    </div>
+    <picture class="om-band-media">
+      <source type="image/avif" srcset="/images/fire-1440.avif" />
+      <img
+        src="/images/fire-1440.jpg"
+        alt="Elden i en av de vedeldade ugnarna"
+        width="1440"
+        height="960"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
   </section>
 
   {/* ---------- Press: real mentions, outbound cards ---------- */}
@@ -107,5 +169,20 @@ const press = [
         ))
       }
     </ul>
+  </section>
+
+  <section class="om-photo">
+    <picture>
+      <source type="image/avif" srcset="/images/pizza-1520.avif" />
+      <source type="image/webp" srcset="/images/pizza-1520.webp" />
+      <img
+        src="/images/pizza-1100.jpg"
+        alt="Färdig napolitansk pizza direkt från vedugnen"
+        width="1520"
+        height="1013"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
   </section>
 </BaseLayout>

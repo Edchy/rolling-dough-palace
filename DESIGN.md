@@ -90,6 +90,16 @@ Flat by default. Depth comes from contrast, scale, and composition, not shadows.
 - **Primary:** Press Black fill, Flour White text. The `--accent` token (today = ink) drives the fill so a future color slots in cleanly.
 - **Hover / Focus:** restrained — subtle state change only; visible focus ring (current: 2px outline, offset 3px).
 
+### Brand glyph (the wheel)
+- One bespoke motif: a **bike wheel** (tyre, hub, four spokes), the cykel-oven identity redrawn as a quirky marker. **Not** a stock icon set; the brutalist register rejects tidy SaaS iconography, so the brand speaks in its own mark.
+- Stored as the `--glyph-wheel` token and rendered via CSS `mask`, so it inks itself from `currentColor` and flips to paper on dark cells automatically. Never hardcode the SVG at a call site; use the `.glyph-mark` class.
+- Two roles: a **corner stamp** on genuine text/checklist cells (step-list, contact-brief), sitting alongside (not replacing) the mono index; and a small **section-heading mark** (`.glyph-mark--head`, in `--accent`) that punctuates a title rather than competing with it. Use sparingly, as fun punctuation, not as a bullet on every list (card/tag/grid lists already carry their own visual meaning and stay glyph-free).
+
+### Food icons (the pizzaicons set)
+- A hand-picked Noun Project line set lives in `/public/pizzaicons/` (pizza piece, chilli, cheese, hot pizza, pizza flipper, pizza cutter, tomato, onion). Single-path, so they ink themselves from `currentColor` via the same `.glyph-mark` mechanism as the wheel and flip on dark cells.
+- These are **content** markers, tied to meaning, never generic UI bullets: a per-pizza icon beside the menu index (Margherita=slice, Diavola=chilli, Quattro formaggi=cheese), the cooking story on `/event` "Så funkar det" (cutter then fire then flipper, matching plan/light/bake), and food-relevant section head-marks.
+- Set the file per call site with the `--mark` custom property via a `.glyph-mark--<name>` modifier; the base `.glyph-mark` defaults to the wheel. Never reference the SVG path directly at a call site.
+
 ### Navigation
 - Inline links in Muted Ink, darkening to full ink on hover; a pill CTA ("Boka oss") at the end. A `<details>` dropdown groups city/catering links so the top nav stays scannable (per PRODUCT.md). Dropdown panel floats with one soft shadow. Mobile: header stacks vertically.
 
