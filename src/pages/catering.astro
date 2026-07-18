@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const eventTypes = [
   {
@@ -122,7 +123,7 @@ const steps = [
     </p>
     <div class="closing-actions">
       <button class="button primary" type="button" data-booking-trigger>Boka oss</button>
-      <a class="button ghost" href="/">Till startsidan</a>
+      <a class="button ghost" href={`${base}/`}>Till startsidan</a>
     </div>
   </section>
 </BaseLayout>

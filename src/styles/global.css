@@ -2067,20 +2067,20 @@ input:focus-visible {
    so they mask-ink from currentColor exactly like the wheel and flip on
    dark cells. Set the file per call site with --mark. Used as CONTENT
    markers (menu items, the cooking story), never as generic UI bullets. */
-.glyph-mark--margherita { --mark: url("/pizzaicons/noun-tomato-8260761.svg"); }
-.glyph-mark--diavola { --mark: url("/pizzaicons/noun-sausage-8260777.svg"); }
-.glyph-mark--chilli { --mark: url("/pizzaicons/noun-chilli-hot-8260775.svg"); }
-.glyph-mark--ost { --mark: url("/pizzaicons/noun-cheese-8260772.svg"); }
-.glyph-mark--fire { --mark: url("/pizzaicons/noun-hot-pizza-8260763.svg"); }
-.glyph-mark--flipper { --mark: url("/pizzaicons/noun-baking-pizza-8260776.svg"); }
-.glyph-mark--cutter { --mark: url("/pizzaicons/noun-pizza-cutter-8260769.svg"); }
-.glyph-mark--tomato { --mark: url("/pizzaicons/noun-tomato-8260761.svg"); }
-.glyph-mark--onion { --mark: url("/pizzaicons/noun-onion-8260782.svg"); }
-.glyph-mark--fresh { --mark: url("/pizzaicons/noun-fresh-pizza-8260759.svg"); }
-.glyph-mark--route { --mark: url("/pizzaicons/noun-wheel-7933467.svg"); }
-.glyph-mark--rolling-pin { --mark: url("/pizzaicons/noun-rolling-pin-pizza-8260783.svg"); }
-.glyph-mark--pedals { --mark: url("/pizzaicons/noun-pedals-7731791.svg"); }
-.glyph-mark--pizza-flipper { --mark: url("/pizzaicons/noun-pizza-flipper-8260773.svg"); }
+.glyph-mark--margherita { --mark: url("/pedalingpizzapalace/pizzaicons/noun-tomato-8260761.svg"); }
+.glyph-mark--diavola { --mark: url("/pedalingpizzapalace/pizzaicons/noun-sausage-8260777.svg"); }
+.glyph-mark--chilli { --mark: url("/pedalingpizzapalace/pizzaicons/noun-chilli-hot-8260775.svg"); }
+.glyph-mark--ost { --mark: url("/pedalingpizzapalace/pizzaicons/noun-cheese-8260772.svg"); }
+.glyph-mark--fire { --mark: url("/pedalingpizzapalace/pizzaicons/noun-hot-pizza-8260763.svg"); }
+.glyph-mark--flipper { --mark: url("/pedalingpizzapalace/pizzaicons/noun-baking-pizza-8260776.svg"); }
+.glyph-mark--cutter { --mark: url("/pedalingpizzapalace/pizzaicons/noun-pizza-cutter-8260769.svg"); }
+.glyph-mark--tomato { --mark: url("/pedalingpizzapalace/pizzaicons/noun-tomato-8260761.svg"); }
+.glyph-mark--onion { --mark: url("/pedalingpizzapalace/pizzaicons/noun-onion-8260782.svg"); }
+.glyph-mark--fresh { --mark: url("/pedalingpizzapalace/pizzaicons/noun-fresh-pizza-8260759.svg"); }
+.glyph-mark--route { --mark: url("/pedalingpizzapalace/pizzaicons/noun-wheel-7933467.svg"); }
+.glyph-mark--rolling-pin { --mark: url("/pedalingpizzapalace/pizzaicons/noun-rolling-pin-pizza-8260783.svg"); }
+.glyph-mark--pedals { --mark: url("/pedalingpizzapalace/pizzaicons/noun-pedals-7731791.svg"); }
+.glyph-mark--pizza-flipper { --mark: url("/pedalingpizzapalace/pizzaicons/noun-pizza-flipper-8260773.svg"); }
 
 /* Brand icon set in the footer booking cell. Declared after .glyph-mark
    so the mark/size win source-order. */
@@ -2090,9 +2090,9 @@ input:focus-visible {
   flex: none;
 }
 
-.footer-booking-mark--pedals { --mark: url("/pizzaicons/noun-pedals-7731791.svg"); }
-.footer-booking-mark--pizza { --mark: url("/pizzaicons/noun-pizza-piece-8260760.svg"); }
-.footer-booking-mark--castle { --mark: url("/pizzaicons/noun-palace-5545053.svg"); }
+.footer-booking-mark--pedals { --mark: url("/pedalingpizzapalace/pizzaicons/noun-pedals-7731791.svg"); }
+.footer-booking-mark--pizza { --mark: url("/pedalingpizzapalace/pizzaicons/noun-pizza-piece-8260760.svg"); }
+.footer-booking-mark--castle { --mark: url("/pedalingpizzapalace/pizzaicons/noun-palace-5545053.svg"); }
 
 /* Section-heading mark: an icon set after the title, in the accent ink,
    sized BIG so it reads as a bold companion to the heading, not punctuation.

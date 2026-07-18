@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const notes = [
   {
@@ -43,7 +44,7 @@ const notes = [
   <section class="om-photo">
     <picture>
       <img
-        src="/images/kant-glod-trailer.png"
+        src={`${base}/images/kant-glod-trailer.png`}
         alt="Fiktiv röd pizzavagn uppställd i en grön industrigård"
         width="1942"
         height="809"
@@ -84,7 +85,7 @@ const notes = [
       <figure class="om-frame om-frame--a">
         <picture>
           <img
-            src="/images/kant-glod-team.png"
+            src={`${base}/images/kant-glod-team.png`}
             alt="Två fiktiva pizzabagare arbetar vid ett utomhuskök"
             width="1672"
             height="941"
@@ -95,7 +96,7 @@ const notes = [
       </figure>
       <figure class="om-frame om-frame--b">
         <img
-          src="/images/kant-glod-fire.png"
+          src={`${base}/images/kant-glod-fire.png`}
           alt="Händer som sköter elden i en mobil vedugn"
           width="1448"
           height="1086"
@@ -124,7 +125,7 @@ const notes = [
     </div>
     <picture class="om-band-media">
       <img
-        src="/images/kant-glod-fire.png"
+        src={`${base}/images/kant-glod-fire.png`}
         alt="Glöd och ved i den fiktiva pizzaverkstadens ugn"
         width="1448"
         height="1086"
@@ -155,7 +156,7 @@ const notes = [
   <section class="om-photo">
     <picture>
       <img
-        src="/images/kant-glod-pizza.png"
+        src={`${base}/images/kant-glod-pizza.png`}
         alt="Nygräddad surdegspizza med vårlök och chili"
         width="1536"
         height="1024"

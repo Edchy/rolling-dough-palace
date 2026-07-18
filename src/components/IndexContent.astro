@@ -1,5 +1,6 @@
 ---
 /* Shared home-page content for the index page. */
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const pizzas = [
   {
     name: "Röd kant",
@@ -65,7 +66,7 @@ const socials = [
 
   <div class="hero-cell hero-cell--actions">
     <button class="button primary" type="button" data-booking-trigger>Boka oss</button>
-    <a class="button ghost" href="/catering">Se hur det funkar</a>
+    <a class="button ghost" href={`${base}/catering`}>Se hur det funkar</a>
   </div>
 
   <div class="hero-cell hero-cell--media">
@@ -73,7 +74,7 @@ const socials = [
       <figure class="hero-frame hero-frame--top">
         <picture>
           <img
-            src="/images/kant-glod-team.png"
+            src={`${base}/images/kant-glod-team.png`}
             width="1672"
             height="941"
             alt="Två pizzabagare arbetar med deg och eld vid en mobil vedugn"
@@ -86,7 +87,7 @@ const socials = [
       <figure class="hero-frame hero-frame--tilt">
         <picture>
           <img
-            src="/images/kant-glod-pizza.png"
+            src={`${base}/images/kant-glod-pizza.png`}
             width="1536"
             height="1024"
             alt="Blåsig surdegspizza med vårlök och chili på väg ut ur vedugnen"
@@ -104,7 +105,7 @@ const socials = [
   <div class="concept-media">
     <picture>
       <img
-        src="/images/kant-glod-fire.png"
+        src={`${base}/images/kant-glod-fire.png`}
         width="1448"
         height="1086"
         alt="En pizzabagare ordnar veden i en glödande vedugn"
@@ -127,7 +128,7 @@ const socials = [
     <p class="show-note">
       Ge oss en plats, ett datum och ett ungefärligt antal hungriga.
     </p>
-    <a class="button primary" href="/kontakt">Kontakt</a>
+    <a class="button primary" href={`${base}/kontakt`}>Kontakt</a>
   </div>
 </section>
 
@@ -136,7 +137,7 @@ const socials = [
   <div class="show-photo">
     <picture>
       <img
-        src="/images/kant-glod-trailer.png"
+        src={`${base}/images/kant-glod-trailer.png`}
         alt="Röd mobil pizzavagn med vedugn i en grön industrigård"
         width="1942"
         height="809"
@@ -216,11 +217,11 @@ const socials = [
       Rolling Dough Palace är en påhittad identitet skapad för det här
       portfolio-projektet. Läs berättelsen bakom konceptet.
     </p>
-    <a class="button primary" href="/om-oss">Om oss</a>
+    <a class="button primary" href={`${base}/om-oss`}>Om oss</a>
   </div>
   <img
     class="about-media"
-    src="/images/kant-glod-fire.png"
+    src={`${base}/images/kant-glod-fire.png`}
     width="1448"
     height="1086"
     alt="Vedeldad pizzaugn i skymningen"

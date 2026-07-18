@@ -3,10 +3,11 @@
 // then each nav item lives in its own cell divided by hard ink rules.
 // On small screens the cells collapse to a hamburger that opens a
 // full-viewport candy-block menu modal.
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const links = [
-  { href: "/catering", label: "Catering", tone: "mint", icon: "onion" },
-  { href: "/om-oss", label: "Om oss", tone: "lilac", icon: "tomato" },
-  { href: "/kontakt", label: "Kontakt", tone: "yellow", icon: "diavola" },
+  { href: `${base}/catering`, label: "Catering", tone: "mint", icon: "onion" },
+  { href: `${base}/om-oss`, label: "Om oss", tone: "lilac", icon: "tomato" },
+  { href: `${base}/kontakt`, label: "Kontakt", tone: "yellow", icon: "diavola" },
 ];
 
 // Theme picker: swaps the site palette (CSS custom properties) in place.
@@ -23,7 +24,7 @@ const themes = [
 ---
 
 <header class="site-header">
-  <a class="brand" href="/" aria-label="Rolling Dough Palace, hem">
+  <a class="brand" href={`${base}/`} aria-label="Rolling Dough Palace, hem">
     <span class="wordmark">Rolling<br />Dough Palace</span>
   </a>
 
@@ -87,7 +88,7 @@ const themes = [
 
 <div class="nav-modal" id="nav-modal" hidden>
   <div class="nav-modal__bar">
-    <a class="nav-modal__brand" href="/">Rolling<br />Dough Palace</a>
+    <a class="nav-modal__brand" href={`${base}/`}>Rolling<br />Dough Palace</a>
     <button class="nav-modal__close" type="button" aria-label="Stäng meny">
       <span aria-hidden="true">×</span>
     </button>
