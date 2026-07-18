@@ -1,5 +1,5 @@
 /* ============================================================
-   Pedalling Pizza Palace
+   Rolling Dough Palace
    Clean slate. Foundations + header/footer only.
    Brand direction (color, type, layout) gets built per section.
    ============================================================ */
@@ -1821,7 +1821,7 @@ input:focus-visible {
   color: var(--text);
 }
 
-/* Six cards, six distinct candy backgrounds. */
+/* Working principles, each with its own candy background. */
 .press-card:nth-child(1) {
   background: var(--block-1); /* mint */
 }
@@ -1842,7 +1842,8 @@ input:focus-visible {
   background: var(--candy-6); /* sky */
 }
 
-.press-card a {
+.press-card a,
+.press-card > div {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -1854,11 +1855,6 @@ input:focus-visible {
     color 0.2s ease;
 }
 
-.press-card a:hover {
-  background: var(--text);
-  color: var(--paper);
-}
-
 .press-outlet {
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -1866,11 +1862,6 @@ input:focus-visible {
   text-transform: uppercase;
   color: currentColor;
   opacity: 0.75;
-}
-
-.press-card a:hover .press-outlet {
-  color: var(--paper);
-  opacity: 0.85;
 }
 
 .press-title {
@@ -1886,11 +1877,6 @@ input:focus-visible {
   font-size: 0.72rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-}
-
-.press-card a:hover .press-go {
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 /* ---------- Content pages ---------- */
@@ -3239,7 +3225,7 @@ input:focus-visible {
   }
 
   .footer-wordmark {
-    /* Floor must keep the longest word ("PEDALLING") inside the cell's
+    /* Floor must keep the longest word in the brand inside the cell's
        content width or it pushes the page wider than the viewport and the
        whole site sidescrolls. 13vw keeps it fitting down to ~320px. */
     font-size: clamp(2.6rem, 13vw, 5.4rem);

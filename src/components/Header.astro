@@ -23,8 +23,8 @@ const themes = [
 ---
 
 <header class="site-header">
-  <a class="brand" href="/" aria-label="Pedalling Pizza Palace, hem">
-    <span class="wordmark">Pedalling<br />Pizza Palace</span>
+  <a class="brand" href="/" aria-label="Rolling Dough Palace, hem">
+    <span class="wordmark">Rolling<br />Dough Palace</span>
   </a>
 
   <nav class="nav" aria-label="Huvudnavigation">
@@ -87,7 +87,7 @@ const themes = [
 
 <div class="nav-modal" id="nav-modal" hidden>
   <div class="nav-modal__bar">
-    <a class="nav-modal__brand" href="/">Pedalling<br />Pizza Palace</a>
+    <a class="nav-modal__brand" href="/">Rolling<br />Dough Palace</a>
     <button class="nav-modal__close" type="button" aria-label="Stäng meny">
       <span aria-hidden="true">×</span>
     </button>
@@ -138,7 +138,7 @@ const themes = [
       o.setAttribute("aria-checked", String(o.dataset.theme === id)),
     );
     try {
-      localStorage.setItem("ppp-theme", id);
+      localStorage.setItem("rolling-dough-palace-theme", id);
     } catch {}
   };
 

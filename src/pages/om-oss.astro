@@ -1,67 +1,52 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-// Real press mentions from the original site's article links.
-const press = [
+const notes = [
   {
-    outlet: "Uppsala Nya Tidning",
-    title: "De driver en pizzeria på cykel med en vedugn på släp",
-    href: "https://unt.se/nyheter/ekonomi/artikel/de-driver-en-pizzeria-pa-cykel-med-en-vedugn-pa-slap/rkmyk5zj",
+    outlet: "01 / Degen",
+    title: "Lång jäsning, starkt mjöl och tid nog att utveckla smak.",
   },
   {
-    outlet: "P4 Uppland",
-    title: "Sålde 1000 pizzor på sin cykelburna pizzaugn",
-    href: "https://sverigesradio.se/artikel/salde-1000-pizzor-pa-sin-cykelburna-pizzaugn-ar-otroligt-nojda",
+    outlet: "02 / Elden",
+    title: "Björkved, hög värme och ständig uppmärksamhet vid ugnsöppningen.",
   },
   {
-    outlet: "P4 Uppland",
-    title: "Valborgsplanerna ska sälja pizza med hemmagjord cykelugn",
-    href: "https://sverigesradio.se/artikel/valborgsplanerna-ska-salja-pizza-med-hemmagjord-cykelugn",
+    outlet: "03 / Platsen",
+    title: "Varje uppställning anpassas efter gården, rummet och människorna.",
   },
   {
-    outlet: "Uppsala Nya Tidning",
-    title: "Möt Uppsalas cyklande pizzakollektiv",
-    href: "https://unt.se/nyheter/uppsala/artikel/tv-mot-uppsalas-cyklande-pizzakollektiv/jogomvgr",
-  },
-  {
-    outlet: "Svensk Damtidning",
-    title: "Kockarna om Victorias privata middagsbesök. Därför kunde hon inte äta",
-    href: "https://www.svenskdam.se/kungligt/kockarna-om-victorias-privata-middagsbesok-darfor-kunde-hon-inte-ata/8683933",
-  },
-  {
-    outlet: "Svensk Damtidning",
-    title: "Victorias dolda sjukdom. Maten hon inte kan äta",
-    href: "https://www.svenskdam.se/kungligt/victorias-dolda-sjukdom-maten-hon-inte-kan-ata-har-lart-oss/8687550",
+    outlet: "04 / Kvällen",
+    title: "Serveringen följer festen. Ingen klocka behöver ropa högre än gästerna.",
   },
 ];
 ---
 
 <BaseLayout
-  title="Om oss | Pedalling Pizza Palace"
-  description="Historien bakom Pedalling Pizza Palace: mobil pizzacatering med vedugn och egenbyggda ugnar på hjul, igång sedan 2021."
+  title="Om konceptet | Rolling Dough Palace"
+  description="Berättelsen bakom det fiktiva pizza-konceptet Rolling Dough Palace, skapat som ett fristående portfolio-case."
 >
   <section class="event-hero event-hero--lilac">
-    <h1>Mobil vedugnspizzeria sedan 2021.</h1>
+    <h1>Ett fiktivt pizzakollektiv, byggt för att kännas på riktigt.</h1>
     <div class="event-hero__lead">
       <p>
-        Pedalling Pizza Palace har sedan 2021 dykt upp på alltifrån bröllop och
-        musikfestivaler till företagsevent och hemmafester.
+        Rolling Dough Palace är en påhittad identitet skapad för ett
+        portfolio-projekt. Inga personer, platser eller meriter på sidan tillhör
+        en verklig verksamhet.
       </p>
       <p>
-        Allt gör vi själva för hand. Vi bygger våra egna ugnar, gör vår egen
-        deg och bakar napolitanska pizzor med kvalitet framför kvantitet.
+        Konceptet kretsar kring en rörlig pizzaverkstad, långjäst deg och en
+        vedugn som gör själva bakningen till en del av kvällen.
       </p>
     </div>
   </section>
 
   <section class="om-photo">
     <picture>
-      <source type="image/avif" srcset="/images/hero-1920.avif" />
       <img
-        src="/images/hero-1600.jpg"
-        alt="Pedalling Pizza Palace på plats med fordon och vedugn"
-        width="1600"
-        height="523"
+        src="/images/kant-glod-trailer.png"
+        alt="Fiktiv röd pizzavagn uppställd i en grön industrigård"
+        width="1942"
+        height="809"
         loading="lazy"
         decoding="async"
       />
@@ -73,23 +58,23 @@ const press = [
       <h2>
         <span
           class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--pedals"
-          aria-hidden="true"></span>Fordonen
+          aria-hidden="true"></span>Vagnen
       </h2>
       <p>
-        Vår trupp av fordon är alla sig olika. De flesta av dem från Italien. Vi
-        har nämligen åkt ner med lastbil från Sverige och köpt diverse Piaggios,
-        lastat på dem och fraktat hem dem.
+        En kompakt röd trailer blir kök, arbetsyta och samlingspunkt. Den är
+        ritad för att öppnas mot platsen i stället för att gömma arbetet bakom
+        en lucka.
       </p>
     </div>
     <div class="colour-pair__cell colour-pair__cell--pink">
       <h2>
         <span
           class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--flipper"
-          aria-hidden="true"></span>Ugnarna
+          aria-hidden="true"></span>Värmen
       </h2>
       <p>
-        Pizzaugnarna på samtliga fordon är handbyggda av oss. En konst vi blivit
-        bättre på för var ugn vi bygger.
+        Vedugnen arbetar varmt och snabbt. Det ger en luftig kant, en mjuk mitt
+        och precis lagom mycket sot under botten.
       </p>
     </div>
   </section>
@@ -98,12 +83,11 @@ const press = [
     <div class="om-collage__inner">
       <figure class="om-frame om-frame--a">
         <picture>
-          <source type="image/avif" srcset="/images/trucks.avif" />
           <img
-            src="/images/trucks-1600.jpg"
-            alt="Ombyggda italienska Piaggio-fordon med vedugnar"
-            width="1200"
-            height="541"
+            src="/images/kant-glod-team.png"
+            alt="Två fiktiva pizzabagare arbetar vid ett utomhuskök"
+            width="1672"
+            height="941"
             loading="lazy"
             decoding="async"
           />
@@ -111,10 +95,10 @@ const press = [
       </figure>
       <figure class="om-frame om-frame--b">
         <img
-          src="/images/oven-1100.jpg"
-          alt="En handbyggd vedugn på ett av fordonen"
-          width="1100"
-          height="731"
+          src="/images/kant-glod-fire.png"
+          alt="Händer som sköter elden i en mobil vedugn"
+          width="1448"
+          height="1086"
           loading="lazy"
           decoding="async"
         />
@@ -127,42 +111,41 @@ const press = [
       <h2>
         <span
           class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--pizza-flipper"
-          aria-hidden="true"></span>Så jobbar vi
+          aria-hidden="true"></span>Vår arbetsordning
       </h2>
       <p>
-        Vi prioriterar kvalitet framför kvantitet. Schyssta råvaror, egen deg
-        och egna ugnar.
+        Få pizzor på menyn. Bra råvaror i varje lager. Ett tempo som håller
+        både degen och gästerna glada.
       </p>
       <p>
-        Allt gör vi själva för hand, från att bygga självaste pizzaugnen till
-        vår egna unika pizzadeg.
+        Vi förbereder degen i lugn och ro, eldar på plats och bakar först när
+        någon faktiskt ska äta.
       </p>
     </div>
     <picture class="om-band-media">
-      <source type="image/avif" srcset="/images/fire-1440.avif" />
       <img
-        src="/images/fire-1440.jpg"
-        alt="Elden i en av de vedeldade ugnarna"
-        width="1440"
-        height="960"
+        src="/images/kant-glod-fire.png"
+        alt="Glöd och ved i den fiktiva pizzaverkstadens ugn"
+        width="1448"
+        height="1086"
         loading="lazy"
         decoding="async"
       />
     </picture>
   </section>
 
-  {/* ---------- Press: real mentions, outbound cards ---------- */}
+  {/* ---------- Working principles ---------- */}
   <section class="press">
-    <h2>Snacket går</h2>
+    <h2>Fyra saker vi inte slarvar med</h2>
     <ul class="press-list">
       {
-        press.map((item) => (
+        notes.map((item) => (
           <li class="press-card">
-            <a href={item.href} target="_blank" rel="noopener noreferrer">
+            <div>
               <span class="press-outlet">{item.outlet}</span>
               <span class="press-title">{item.title}</span>
-              <span class="press-go" aria-hidden="true">Läs artikeln</span>
-            </a>
+              <span class="press-go" aria-hidden="true">deg för deg</span>
+            </div>
           </li>
         ))
       }
@@ -171,12 +154,11 @@ const press = [
 
   <section class="om-photo">
     <picture>
-      <source type="image/avif" srcset="/images/pizza-1520.avif" />
       <img
-        src="/images/pizza-1100.jpg"
-        alt="Färdig napolitansk pizza direkt från vedugnen"
-        width="1520"
-        height="1013"
+        src="/images/kant-glod-pizza.png"
+        alt="Nygräddad surdegspizza med vårlök och chili"
+        width="1536"
+        height="1024"
         loading="lazy"
         decoding="async"
       />

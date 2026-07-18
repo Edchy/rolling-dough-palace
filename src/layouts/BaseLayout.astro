@@ -5,8 +5,8 @@ import BookingModal from "../components/BookingModal.astro";
 import "../styles/global.css";
 
 const {
-  title = "Pedalling Pizza Palace",
-  description = "Mobil vedugnspizzeria. Vi kommer till er, tänder ugnen och serverar nygräddad pizza på bröllop, festivaler och event i Stockholm och Uppsala.",
+  title = "Rolling Dough Palace",
+  description = "Rörlig pizzaverkstad med vedugn för fester, festivaler och sammankomster i södra Sverige.",
 } = Astro.props;
 
 const palette = "pastel";
@@ -19,15 +19,13 @@ const palette = "pastel";
     {/* Apply the saved palette before paint to avoid a theme flash. */}
     <script is:inline>
       try {
-        var t = localStorage.getItem("ppp-theme");
+        var t = localStorage.getItem("rolling-dough-palace-theme");
         if (t) document.documentElement.setAttribute("data-palette", t);
       } catch (e) {}
     </script>
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#2a2350" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

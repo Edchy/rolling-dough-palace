@@ -9,8 +9,8 @@ const today = new Date().toLocaleDateString("sv-SE");
 
   <div class="booking-modal__panel">
     <div class="booking-modal__intro">
-      <h2 id="booking-title">Berätta om ert event.</h2>
-      <p>Fyll i formuläret med det ni vet så hör vi av oss inom kort.</p>
+      <h2 id="booking-title">Ge oss tre hållpunkter.</h2>
+      <p>Plats, datum och antal gäster räcker för att börja.</p>
     </div>
 
     <form
@@ -21,16 +21,16 @@ const today = new Date().toLocaleDateString("sv-SE");
         <p class="booking-form__hint">Välj stad</p>
         <div class="booking-form__choices">
           <label>
-            <input type="radio" name="Plats" value="Uppsala" required />
-            <span>Uppsala</span>
+            <input type="radio" name="Plats" value="Skåne" required />
+            <span>Skåne</span>
           </label>
           <label>
-            <input type="radio" name="Plats" value="Stockholm" />
-            <span>Stockholm</span>
+            <input type="radio" name="Plats" value="Halland" />
+            <span>Halland</span>
           </label>
           <label>
-            <input type="radio" name="Plats" value="Göteborg" />
-            <span>Göteborg</span>
+            <input type="radio" name="Plats" value="Annat" />
+            <span>Någon annanstans</span>
           </label>
         </div>
       </div>
@@ -41,8 +41,8 @@ const today = new Date().toLocaleDateString("sv-SE");
       </label>
 
       <label class="booking-form__field booking-form__field--right">
-        <span>Antal pizzor, typ?</span>
-        <input type="text" name="Antal pizzor, typ" placeholder="T.ex. 40 st, gärna margherita" />
+        <span>Hur många ska äta?</span>
+        <input type="text" name="Antal gäster" placeholder="T.ex. cirka 60 personer" />
       </label>
 
       <label class="booking-form__field">
@@ -51,8 +51,8 @@ const today = new Date().toLocaleDateString("sv-SE");
       </label>
 
       <label class="booking-form__field booking-form__field--right">
-        <span>Ungefärlig tid för servering</span>
-        <input type="text" name="Ungefärlig tid för servering" placeholder="T.ex. runt 14-15" />
+        <span>När blir folk hungriga?</span>
+        <input type="text" name="Serveringstid" placeholder="T.ex. från 18.30" />
       </label>
 
       <label class="booking-form__field booking-form__field--full">
@@ -76,12 +76,12 @@ const today = new Date().toLocaleDateString("sv-SE");
       </label>
 
       <label class="booking-form__field booking-form__field--full">
-        <span>Övriga frågor eller önskemål</span>
-        <textarea name="Övriga frågor eller önskemål" rows="4" placeholder="Berätta gärna mer om ert event, allergier, eller vad ni undrar över"></textarea>
+        <span>Vad behöver vi veta?</span>
+        <textarea name="Meddelande" rows="4" placeholder="Berätta om platsen, allergier och stämningen ni vill åt"></textarea>
       </label>
 
       <div class="booking-form__field booking-form__field--full" role="radiogroup" aria-label="Är ni ett företag?">
-        <span>Är ni ett företag?</span>
+        <span>Är det via en organisation?</span>
         <div class="booking-form__choices booking-form__choices--compact">
           <label>
             <input type="radio" name="Företag" value="Nej" />
@@ -94,7 +94,7 @@ const today = new Date().toLocaleDateString("sv-SE");
         </div>
       </div>
 
-      <button class="button primary booking-form__submit" type="submit">Skicka offertförfrågan</button>
+      <button class="button primary booking-form__submit" type="submit">Skicka förfrågan</button>
 
       <div class="booking-form__mark" aria-hidden="true">
         <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">

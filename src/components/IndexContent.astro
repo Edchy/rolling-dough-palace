@@ -2,47 +2,47 @@
 /* Shared home-page content for the index page. */
 const pizzas = [
   {
-    name: "Margherita",
+    name: "Röd kant",
     img: "marg",
-    text: "Tomatsås på vårt eget recept, fattigmanspesto på olivolja, färsk basilika och vitlök, toppad med mozzarella fior di latte. En klassiker.",
+    text: "Långkokt tomat, fior di latte, basilika och lagrad svensk hårdost. Vår raka, röda startpunkt.",
   },
   {
-    name: "Diavola",
+    name: "Het honung",
     img: "diavola",
-    text: "Tomatsås, salami ventricina och färsk chili. Efter gräddningen toppas pizzan med vår hemliga chiliolja.",
+    text: "Tomat, rökt salami, picklad chili och honung med sting. Söt först, varm strax efter.",
   },
   {
-    name: "Quattro formaggi",
+    name: "Grön glöd",
     img: "ost",
-    text: "Tomatsås och mycket ost: mozzarella fior di latte, parmesan, cheddar och gorgonzola.",
+    text: "Fior di latte, grillad vårlök, citron, örter och rostad vitlök. Ingen tomat, ingen ursäkt.",
   },
 ];
 
 const cities = [
-  { label: "Stockholm", tone: "mint" },
-  { label: "Uppsala", tone: "lilac" },
-  { label: "Göteborg", tone: "yellow" },
+  { label: "Skåne", tone: "mint" },
+  { label: "Halland", tone: "lilac" },
+  { label: "Småland", tone: "yellow" },
 ];
 
 const socials = [
   {
     label: "Instagram",
-    handle: "@pedallingpizzapalace",
-    href: "https://www.instagram.com/pedallingpizzapalace",
+    handle: "@rollingdoughpalace",
+    href: "#",
     tone: "lilac",
     icon: '<rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none" />',
   },
   {
     label: "Facebook",
-    handle: "/pedalling.pizza.palace",
-    href: "https://www.facebook.com/pedalling.pizza.palace",
+    handle: "/rollingdoughpalace",
+    href: "#",
     tone: "paper",
     icon: '<path d="M14 8.5V6.8c0-.8.2-1.3 1.4-1.3H17V2.6C16.6 2.5 15.6 2.4 14.5 2.4c-2.4 0-4 1.5-4 4.1v2H8v3h2.5V21h3.5v-9.5h2.6l.4-3H14z" fill="currentColor" stroke="none" />',
   },
   {
     label: "TikTok",
-    handle: "@pedallingpizzapalace",
-    href: "https://www.tiktok.com/@pedallingpizzapalace",
+    handle: "@rollingdoughpalace",
+    href: "#",
     tone: "accent",
     icon: '<path d="M15.5 2.5c.3 2.1 1.6 3.8 3.7 4.1v2.6c-1.4.1-2.7-.3-3.8-1v6.3c0 3.4-2.7 5.9-6 5.5-2.6-.3-4.6-2.5-4.6-5.1 0-3.1 2.8-5.5 5.9-5v2.8c-.4-.1-.8-.2-1.2-.2-1.4 0-2.5 1.2-2.4 2.6.1 1.3 1.2 2.3 2.5 2.3 1.4 0 2.5-1.1 2.5-2.5V2.5h2.8z" fill="currentColor" stroke="none" />',
   },
@@ -52,15 +52,14 @@ const socials = [
 {/* ---------- Hero: type-led statement + framed brand photo ---------- */}
 <section class="hero">
   <div class="hero-cell hero-cell--head">
-    <p class="hero-meta">Stockholm, Uppsala &amp; Göteborg</p>
+    <p class="hero-meta">Skåne, Halland &amp; Småland</p>
     <h1>
-      <span class="hero-line">Pizza på hjul,</span>
-      <br class="hero-break" /><em class="hero-line"> rakt ur elden.</em>
+      <span class="hero-line">Bra kant.</span>
+      <br class="hero-break" /><em class="hero-line"> Full glöd.</em>
     </h1>
     <p class="hero-lead">
-      Vedugnseldad pizza, bakad på plats. Vi rullar in med pizzatrucken, eldar
-      igång och gräddar. Bröllop, festivaler, företagsevent, fester och allt
-      däremellan.
+      Surdegspizza bakad där ni är. Vi tar med ugn, ved och tempo till gårdar,
+      festivaler, bröllop och andra kvällar som förtjänar en egen eld.
     </p>
   </div>
 
@@ -73,12 +72,11 @@ const socials = [
     <div class="hero-collage">
       <figure class="hero-frame hero-frame--top">
         <picture>
-          <source type="image/avif" srcset="/images/guys.avif" />
           <img
-            src="/images/guys.avif"
-            width="900"
-            height="503"
-            alt="Två grundare vid den egenbyggda vedugnen på flaket av en blå pickup, med rök som stiger"
+            src="/images/kant-glod-team.png"
+            width="1672"
+            height="941"
+            alt="Två pizzabagare arbetar med deg och eld vid en mobil vedugn"
             fetchpriority="high"
             decoding="async"
           />
@@ -87,16 +85,11 @@ const socials = [
 
       <figure class="hero-frame hero-frame--tilt">
         <picture>
-          <source
-            type="image/avif"
-            srcset="/images/pizza-760.avif 760w, /images/pizza-1100.avif 1100w"
-            sizes="(max-width: 900px) 80vw, 40vw"
-          />
           <img
-            src="/images/pizza-1100.jpg"
-            width="1537"
-            height="1023"
-            alt="Nygräddad margheritapizza som dras ut ur den flammande vedugnen"
+            src="/images/kant-glod-pizza.png"
+            width="1536"
+            height="1024"
+            alt="Blåsig surdegspizza med vårlök och chili på väg ut ur vedugnen"
             loading="lazy"
             decoding="async"
           />
@@ -110,16 +103,11 @@ const socials = [
 <section class="concept">
   <div class="concept-media">
     <picture>
-      <source
-        type="image/avif"
-        srcset="/images/fire-760.avif 760w, /images/fire-1100.avif 1100w, /images/fire-1440.avif 1440w"
-        sizes="(max-width: 900px) 100vw, 45vw"
-      />
       <img
-        src="/images/fire-1440.jpg"
-        width="1440"
-        height="1000"
-        alt="Person som matar elden i den glödande vedugnen med en lång eldgaffel"
+        src="/images/kant-glod-fire.png"
+        width="1448"
+        height="1086"
+        alt="En pizzabagare ordnar veden i en glödande vedugn"
         loading="lazy"
         decoding="async"
       />
@@ -132,13 +120,12 @@ const socials = [
         aria-hidden="true"></span>Vårt erbjudande
     </h2>
     <p>
-      Vi kan hyras in till allt från firmafester och kundevents till bröllop
-      och trädgårdsfester. Utöver catering håller vi också workshops, där vi
-      lär ut hemligheterna så att ni själva kan baka den perfekta pizzan i vår
-      ugn.
+      Vi bygger en liten pizzeria mitt i ert sammanhang. Menyn är kort,
+      serveringen rörlig och pizzorna kommer ut när de är som bäst. Vill ni
+      själva få mjöl på händerna håller vi också praktiska degverkstäder.
     </p>
     <p class="show-note">
-      Hör av er och berätta vad ni är ute efter, så pratar vi vidare.
+      Ge oss en plats, ett datum och ett ungefärligt antal hungriga.
     </p>
     <a class="button primary" href="/kontakt">Kontakt</a>
   </div>
@@ -148,12 +135,11 @@ const socials = [
 <section class="show">
   <div class="show-photo">
     <picture>
-      <source type="image/avif" srcset="/images/trucks.avif" />
       <img
-        src="/images/trucks-1600.jpg"
-        alt="Två ombyggda pickuper med vedugnar på flaket, parkerade på en gräsmatta"
-        width="1200"
-        height="541"
+        src="/images/kant-glod-trailer.png"
+        alt="Röd mobil pizzavagn med vedugn i en grön industrigård"
+        width="1942"
+        height="809"
         loading="lazy"
         decoding="async"
       />
@@ -163,26 +149,25 @@ const socials = [
     <h2>
       <span
         class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--flipper"
-        aria-hidden="true"></span>Egen deg, egen ugn.
+        aria-hidden="true"></span>En pizzeria som dyker upp.
     </h2>
     <p>
-      Pedalling Pizza Palace är en mobil vedugnspizzeria som sedan 2021 dykt
-      upp på allt från bröllop och musikfestivaler till företagsevent och
-      hemmafester. Konceptet är enkelt. Vi kommer hem till er, eldar igång och
-      serverar sedan rykande färsk pizza direkt ur ugnen.
+      Rolling Dough Palace är en fiktiv, rörlig pizzaverkstad född ur en enkel idé:
+      den bästa serveringen händer mitt i festen. Vagnen öppnas, veden tänds
+      och varje pizza bakas framför gästerna.
     </p>
     <p>
-      Vi prioriterar kvalitet framför kvantitet. Schyssta råvaror, egen deg
-      och ugnar vi byggt själva.
+      Vi jobbar med långjäst deg, svenska råvaror när säsongen tillåter och en
+      meny liten nog att kunna göras riktigt bra.
     </p>
   </div>
 </section>
 
 {/* ---------- Pizzorna: the standard menu ---------- */}
 <section class="menu">
-  <h2 class="menu-title">Vårt standardutbud</h2>
+  <h2 class="menu-title">Tre från ugnen</h2>
   <p class="menu-note">
-    Tre fasta favoriter. Andra önskemål? Hör av er, så fixar vi det.
+    En koncentrerad meny som kan byta skepnad med platsen och säsongen.
   </p>
   <ul class="menu-list">
     {
@@ -205,7 +190,7 @@ const socials = [
 {/* ---------- Cities: availability strip ---------- */}
 <section class="cities">
   <h2>
-    Vi rullar i<span class="glyph-mark glyph-mark--head" aria-hidden="true"
+    Här eldar vi<span class="glyph-mark glyph-mark--head" aria-hidden="true"
     ></span>
   </h2>
   <ul class="cities-list">
@@ -218,27 +203,27 @@ const socials = [
     }
   </ul>
   <p>
-    Och runt omkring. Vi är mobila, så närliggande orter och udda platser är
-    oftast inga problem.
+    Plus omvägarna. Finns det en plan yta, rimlig framkomlighet och hungriga
+    människor kan vi oftast hitta dit.
   </p>
 </section>
 
 {/* ---------- About teaser: text + oven photo, links to /om-oss ---------- */}
 <section class="about">
   <div class="about-body">
-    <h2>Cyklar, deg och egenbyggda ugnar.</h2>
+    <h2>Mjöl, metall och en ganska stor eld.</h2>
     <p>
-      Det började 2021 med en idé och en hopsvetsad vedugn på ett cykelflak.
-      Läs vår origin-story.
+      Rolling Dough Palace är en påhittad identitet skapad för det här
+      portfolio-projektet. Läs berättelsen bakom konceptet.
     </p>
     <a class="button primary" href="/om-oss">Om oss</a>
   </div>
   <img
     class="about-media"
-    src="/pizzaicons/experiment.png"
-    width="424"
-    height="424"
-    alt="Pedalling Pizza Palace"
+    src="/images/kant-glod-fire.png"
+    width="1448"
+    height="1086"
+    alt="Vedeldad pizzaugn i skymningen"
   />
 </section>
 
@@ -247,7 +232,7 @@ const socials = [
   <h2 class="socials-title">
     <span
       class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--chilli"
-      aria-hidden="true"></span>Följ elden.
+      aria-hidden="true"></span>Håll koll på glöden.
   </h2>
   <ul class="socials-list">
     {
@@ -290,10 +275,10 @@ const socials = [
   <h2>
     <span
       class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--cutter"
-      aria-hidden="true"></span>Sugna? Då rullar vi.
+      aria-hidden="true"></span>Har ni platsen? Vi har elden.
   </h2>
   <p>
-    Skicka datum, plats och ungefär hur många magar. <br /> Resten fixar vi.
+    Skicka datum, plats och ungefär hur många som ska äta. <br /> Vi tar det därifrån.
   </p>
   <div class="closing-actions">
     <button class="button primary" type="button" data-booking-trigger>Boka oss</button>
