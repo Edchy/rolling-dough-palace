@@ -1,0 +1,47 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BookingModal from "../components/BookingModal.astro";
+import "../styles/global.css";
+
+const {
+  title = "Rolling Dough Palace",
+  description = "Rörlig pizzaverkstad med vedugn för fester, festivaler och sammankomster i södra Sverige.",
+} = Astro.props;
+
+const palette = "pastel";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<!doctype html>
+<html lang="sv" data-palette={palette}>
+  <head>
+    <meta charset="UTF-8" />
+    {/* Apply the saved palette before paint to avoid a theme flash. */}
+    <script is:inline>
+      try {
+        var t = localStorage.getItem("rolling-dough-palace-theme");
+        if (t) document.documentElement.setAttribute("data-palette", t);
+      } catch (e) {}
+    </script>
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <meta name="theme-color" content="#2a2350" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <BookingModal />
+  </body>
+</html>

@@ -1,0 +1,168 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const notes = [
+  {
+    outlet: "01 / Degen",
+    title: "Lång jäsning, starkt mjöl och tid nog att utveckla smak.",
+  },
+  {
+    outlet: "02 / Elden",
+    title: "Björkved, hög värme och ständig uppmärksamhet vid ugnsöppningen.",
+  },
+  {
+    outlet: "03 / Platsen",
+    title: "Varje uppställning anpassas efter gården, rummet och människorna.",
+  },
+  {
+    outlet: "04 / Kvällen",
+    title: "Serveringen följer festen. Ingen klocka behöver ropa högre än gästerna.",
+  },
+];
+---
+
+<BaseLayout
+  title="Om konceptet | Rolling Dough Palace"
+  description="Berättelsen bakom det fiktiva pizza-konceptet Rolling Dough Palace, skapat som ett fristående portfolio-case."
+>
+  <section class="event-hero event-hero--lilac">
+    <h1>Ett fiktivt pizzakollektiv, byggt för att kännas på riktigt.</h1>
+    <div class="event-hero__lead">
+      <p>
+        Rolling Dough Palace är en påhittad identitet skapad för ett
+        portfolio-projekt. Inga personer, platser eller meriter på sidan tillhör
+        en verklig verksamhet.
+      </p>
+      <p>
+        Konceptet kretsar kring en rörlig pizzaverkstad, långjäst deg och en
+        vedugn som gör själva bakningen till en del av kvällen.
+      </p>
+    </div>
+  </section>
+
+  <section class="om-photo">
+    <picture>
+      <img
+        src={`${base}/images/kant-glod-trailer.png`}
+        alt="Fiktiv röd pizzavagn uppställd i en grön industrigård"
+        width="1942"
+        height="809"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+  </section>
+
+  <section class="colour-pair">
+    <div class="colour-pair__cell colour-pair__cell--mint">
+      <h2>
+        <span
+          class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--pedals"
+          aria-hidden="true"></span>Vagnen
+      </h2>
+      <p>
+        En kompakt röd trailer blir kök, arbetsyta och samlingspunkt. Den är
+        ritad för att öppnas mot platsen i stället för att gömma arbetet bakom
+        en lucka.
+      </p>
+    </div>
+    <div class="colour-pair__cell colour-pair__cell--pink">
+      <h2>
+        <span
+          class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--flipper"
+          aria-hidden="true"></span>Värmen
+      </h2>
+      <p>
+        Vedugnen arbetar varmt och snabbt. Det ger en luftig kant, en mjuk mitt
+        och precis lagom mycket sot under botten.
+      </p>
+    </div>
+  </section>
+
+  <section class="om-collage">
+    <div class="om-collage__inner">
+      <figure class="om-frame om-frame--a">
+        <picture>
+          <img
+            src={`${base}/images/kant-glod-team.png`}
+            alt="Två fiktiva pizzabagare arbetar vid ett utomhuskök"
+            width="1672"
+            height="941"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </figure>
+      <figure class="om-frame om-frame--b">
+        <img
+          src={`${base}/images/kant-glod-fire.png`}
+          alt="Händer som sköter elden i en mobil vedugn"
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="page-band page-band--lilac om-work">
+    <div class="page-band__head page-band__head--stack">
+      <h2>
+        <span
+          class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--pizza-flipper"
+          aria-hidden="true"></span>Vår arbetsordning
+      </h2>
+      <p>
+        Få pizzor på menyn. Bra råvaror i varje lager. Ett tempo som håller
+        både degen och gästerna glada.
+      </p>
+      <p>
+        Vi förbereder degen i lugn och ro, eldar på plats och bakar först när
+        någon faktiskt ska äta.
+      </p>
+    </div>
+    <picture class="om-band-media">
+      <img
+        src={`${base}/images/kant-glod-fire.png`}
+        alt="Glöd och ved i den fiktiva pizzaverkstadens ugn"
+        width="1448"
+        height="1086"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+  </section>
+
+  {/* ---------- Working principles ---------- */}
+  <section class="press">
+    <h2>Fyra saker vi inte slarvar med</h2>
+    <ul class="press-list">
+      {
+        notes.map((item) => (
+          <li class="press-card">
+            <div>
+              <span class="press-outlet">{item.outlet}</span>
+              <span class="press-title">{item.title}</span>
+              <span class="press-go" aria-hidden="true">deg för deg</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="om-photo">
+    <picture>
+      <img
+        src={`${base}/images/kant-glod-pizza.png`}
+        alt="Nygräddad surdegspizza med vårlök och chili"
+        width="1536"
+        height="1024"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+  </section>
+</BaseLayout>

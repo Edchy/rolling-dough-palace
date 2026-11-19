@@ -1,0 +1,129 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const eventTypes = [
+  {
+    title: "Långa bord",
+    text: "Bröllop, födelsedagar och gårdskvällar där maten ska märkas utan att styra hela festen.",
+  },
+  {
+    title: "Jobb utan konferensmat",
+    text: "Lanseringar, gårdsbesök och personalfester där serveringen får vara en samlingspunkt.",
+  },
+  {
+    title: "Öppna ytor",
+    text: "Festivaler, marknader och kvarterskvällar där folk kommer, går och blir hungriga i olika takt.",
+  },
+  {
+    title: "Degverkstad",
+    text: "Kavla upp ärmarna. Vi går igenom deg, formning, topping och eld medan ni bakar själva.",
+  },
+];
+
+const steps = [
+  "Ni skickar plats, datum, antal gäster och det ni redan vet.",
+  "Vi sätter en kort meny, planerar flödet och rullar in i god tid.",
+  "När hungern slår till bakar vi allt på plats, en glödhet omgång i taget.",
+];
+---
+
+<BaseLayout
+  title="Så går det till | Rolling Dough Palace"
+  description="Rolling Dough Palace bygger en tillfällig pizzeria på plats för fester, festivaler, arbetsplatser och degverkstäder."
+>
+  <section class="event-hero event-hero--mint">
+    <h1>En pizzeria, precis där ni behöver den.</h1>
+    <div class="event-hero__lead">
+      <p>
+        Rolling Dough Palace rullar in med vedugn, arbetsbord och en kort meny. Vi
+        bygger serveringen på plats och bakar medan resten av kvällen pågår.
+      </p>
+      <p>
+        Ni ordnar en plan yta och hungriga gäster. Tider, meny och tempo löser
+        vi tillsammans.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-grid-section">
+    <div class="page-band__head">
+      <h2>Tillfällen vi gillar</h2>
+      <p>
+        Ett dukat långbord, hundra personer i rörelse eller en liten grupp runt
+        ugnen. Sammanhanget sätter rytmen.
+      </p>
+    </div>
+    <ul class="feature-grid">
+      {
+        eventTypes.map((item) => (
+          <li>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="page-band page-band--lilac">
+    <div class="page-band__head">
+      <h2>Från första rad till första pizza</h2>
+      <p>
+        Själva bakningen får gärna synas. Elden, mjölet och pizzorna på väg ur
+        ugnen är en del av upplevelsen.
+      </p>
+    </div>
+    <ol class="step-list">
+      {
+        steps.map((step) => (
+          <li>
+            <span>{step}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="colour-pair">
+    <div class="colour-pair__cell colour-pair__cell--mint">
+      <h2>
+        <span
+          class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--fresh"
+          aria-hidden="true"></span>Maten
+      </h2>
+      <p>
+        Vi bakar luftig surdegspizza med tydlig kant och få, genomtänkta
+        toppings. Grundmenyn har tre sorter och anpassas efter säsong,
+        allergier och kvällens format.
+      </p>
+    </div>
+    <div class="colour-pair__cell colour-pair__cell--pink">
+      <h2>
+        <span
+          class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--route"
+        aria-hidden="true"></span>Vår karta
+      </h2>
+      <p>
+        Vi utgår från södra Sverige och kör främst i Skåne, Halland och
+        Småland. Bra idéer utanför kartan får gärna utmana oss.
+      </p>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2>
+      <span
+        class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--rolling-pin"
+        aria-hidden="true"></span>Börja med tre rader.
+    </h2>
+    <p>
+      Datum, plats och ett ungefärligt antal gäster räcker. Sedan skissar vi på
+      meny, flöde och pris.
+    </p>
+    <div class="closing-actions">
+      <button class="button primary" type="button" data-booking-trigger>Boka oss</button>
+      <a class="button ghost" href={`${base}/`}>Till startsidan</a>
+    </div>
+  </section>
+</BaseLayout>

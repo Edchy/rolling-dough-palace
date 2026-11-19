@@ -1,0 +1,165 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const contacts = [
+  {
+    city: "Skåne",
+    tone: "mint",
+    phone: "Boka via formuläret",
+    tel: "",
+    email: "skane@rollingdoughpalace.example",
+  },
+  {
+    city: "Halland",
+    tone: "lilac",
+    phone: "Boka via formuläret",
+    tel: "",
+    email: "halland@rollingdoughpalace.example",
+  },
+  {
+    city: "Övriga vägar",
+    tone: "yellow",
+    phone: "Utmana kartan",
+    tel: "",
+    email: "hello@rollingdoughpalace.example",
+  },
+];
+
+const checklist = [
+  "Datum och tid",
+  "Plats",
+  "Ungefär antal gäster",
+  "Typ av event",
+];
+
+const socials = [
+  {
+    label: "Instagram",
+    handle: "@rollingdoughpalace",
+    href: "#",
+    tone: "lilac",
+    icon: '<rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none" />',
+  },
+  {
+    label: "Facebook",
+    handle: "/rollingdoughpalace",
+    href: "#",
+    tone: "paper",
+    icon: '<path d="M14 8.5V6.8c0-.8.2-1.3 1.4-1.3H17V2.6C16.6 2.5 15.6 2.4 14.5 2.4c-2.4 0-4 1.5-4 4.1v2H8v3h2.5V21h3.5v-9.5h2.6l.4-3H14z" fill="currentColor" stroke="none" />',
+  },
+  {
+    label: "TikTok",
+    handle: "@rollingdoughpalace",
+    href: "#",
+    tone: "accent",
+    icon: '<path d="M15.5 2.5c.3 2.1 1.6 3.8 3.7 4.1v2.6c-1.4.1-2.7-.3-3.8-1v6.3c0 3.4-2.7 5.9-6 5.5-2.6-.3-4.6-2.5-4.6-5.1 0-3.1 2.8-5.5 5.9-5v2.8c-.4-.1-.8-.2-1.2-.2-1.4 0-2.5 1.2-2.4 2.6.1 1.3 1.2 2.3 2.5 2.3 1.4 0 2.5-1.1 2.5-2.5V2.5h2.8z" fill="currentColor" stroke="none" />',
+  },
+];
+---
+
+<BaseLayout
+  title="Kontakt | Rolling Dough Palace"
+  description="Skicka en fiktiv bokningsförfrågan till portfolio-konceptet Rolling Dough Palace."
+>
+  <section class="event-hero event-hero--yellow">
+    <h1>Plats, datum, hunger.</h1>
+    <div class="event-hero__lead">
+      <p>
+        Det här är ett portfolio-case och inga förfrågningar skickas. Formuläret
+        visar hur ett riktigt bokningsflöde skulle kunna börja.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-cards" id="kontaktkort">
+    <h2>
+      <span
+        class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--onion"
+        aria-hidden="true"></span>Välj närmaste väg in.
+    </h2>
+    <ul class="contact-card-list">
+      {
+        contacts.map((contact) => (
+          <li class={`contact-card contact-card--${contact.tone}`}>
+            <h3>{contact.city}</h3>
+            <div class="contact-card__links">
+              <a href="#booking-modal" data-booking-trigger>
+                <span>Förfrågan</span>
+                <strong>{contact.phone}</strong>
+              </a>
+              <a href={`mailto:${contact.email}`}>
+                <span>Demo-mail</span>
+                <strong>{contact.email}</strong>
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="contact-brief">
+    <div>
+      <h2>Börja ofärdigt.</h2>
+      <p>
+        En bra förfrågan behöver inte vara en färdig plan. Några hållpunkter
+        räcker för att sätta formen.
+      </p>
+      <button class="button primary contact-brief__cta" type="button" data-booking-trigger>
+        Boka oss
+      </button>
+    </div>
+    <ul>
+      {
+        checklist.map((item) => (
+          <li>
+            <span class="glyph-mark" aria-hidden="true" />
+            {item}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="socials">
+    <h2 class="socials-title">
+      <span
+        class="glyph-mark glyph-mark--head glyph-mark--lead glyph-mark--chilli"
+      aria-hidden="true"></span>Fiktiva flöden
+    </h2>
+    <ul class="socials-list">
+      {
+        socials.map((social) => (
+          <li class={`social-row social-row--${social.tone}`}>
+            <a
+              class="social-link"
+              href={social.href}
+              target="_blank"
+              rel="noopener"
+              aria-label={social.label}
+            >
+              <span class="social-name">{social.label}</span>
+              <span class="social-handle">{social.handle}</span>
+              <span class="social-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  set:html={social.icon}
+                />
+              </span>
+              <span class="social-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,0 +1,66 @@
+---
+const year = new Date().getFullYear();
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const footerLinks = [
+  { href: `${base}/catering`, label: "Catering", tone: "mint" },
+  { href: `${base}/om-oss`, label: "Om", tone: "lilac" },
+  { href: `${base}/kontakt`, label: "Kontakt", tone: "yellow" },
+  {
+    href: `${base}/kontakt`,
+    label: "Boka",
+    tone: "pink",
+    booking: true,
+  },
+];
+---
+
+<footer class="site-footer">
+  <div class="footer-cell footer-cell--brand">
+    <a
+      class="footer-wordmark"
+      href={`${base}/`}
+      aria-label="Rolling Dough Palace, hem"
+    >
+      Rolling<br />Dough<br />Palace
+    </a>
+    <p>
+      En rörlig pizzaverkstad för kvällar som behöver mer eld och bättre kanter.
+    </p>
+    <p class="footer-slogan">deg för deg</p>
+  </div>
+
+  <div class="footer-cell footer-cell--booking">
+    <span class="glyph-mark footer-booking-mark footer-booking-mark--pedals" aria-hidden="true"></span>
+    <span class="glyph-mark footer-booking-mark footer-booking-mark--pizza" aria-hidden="true"></span>
+    <span class="glyph-mark footer-booking-mark footer-booking-mark--castle" aria-hidden="true"></span>
+  </div>
+
+  <div class="footer-cell footer-cell--details">
+    <p>Skåne, Halland, Småland och avstickarna däremellan.</p>
+  </div>
+
+  <nav class="footer-cell footer-cell--nav" aria-label="Footer navigation">
+    {
+      footerLinks.map((link) =>
+        link.booking ? (
+          <button class="footer-link" type="button" data-tone={link.tone} data-booking-trigger>
+            {link.label}
+          </button>
+        ) : (
+          <a class="footer-link" href={link.href} data-tone={link.tone}>
+            {link.label}
+          </a>
+        ),
+      )
+    }
+  </nav>
+
+  <div class="footer-cell footer-cell--legal">
+    <p class="footer-privacy">
+      Det här är ett fiktivt portfolio-case. Formuläret skickar inga uppgifter.
+      Vill ni prata om själva projektet, mejla{" "}
+      <a href="mailto:hello@rollingdoughpalace.example">hello@rollingdoughpalace.example</a>.
+    </p>
+    <span>&copy; {year}</span>
+  </div>
+</footer>

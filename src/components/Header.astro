@@ -1,0 +1,225 @@
+---
+// YRS-TRULY-direction header: a stacked serif wordmark in its own cell,
+// then each nav item lives in its own cell divided by hard ink rules.
+// On small screens the cells collapse to a hamburger that opens a
+// full-viewport candy-block menu modal.
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const links = [
+  { href: `${base}/catering`, label: "Catering", tone: "mint", icon: "onion" },
+  { href: `${base}/om-oss`, label: "Om oss", tone: "lilac", icon: "tomato" },
+  { href: `${base}/kontakt`, label: "Kontakt", tone: "yellow", icon: "diavola" },
+];
+
+// Theme picker: swaps the site palette (CSS custom properties) in place.
+// Each theme is a data-palette value plus its accent colour for the swatch.
+const themes = [
+  { id: "pastel", name: "Pastel", accent: "#ff5bbf" },
+  { id: "italian", name: "Italiensk", accent: "#c8102e" },
+  { id: "mono", name: "Mono", accent: "#1b1b1a" },
+  { id: "harvest", name: "Skörd", accent: "#c0431f" },
+  { id: "candy", name: "Godis", accent: "#ff2d8b" },
+  { id: "moody", name: "Mörk", accent: "#8c2f2a" },
+  { id: "retro", name: "Retro", accent: "#cf5b2a" },
+];
+---
+
+<header class="site-header">
+  <a class="brand" href={`${base}/`} aria-label="Rolling Dough Palace, hem">
+    <span class="wordmark">Rolling<br />Dough Palace</span>
+  </a>
+
+  <nav class="nav" aria-label="Huvudnavigation">
+    <div class="theme-picker">
+      <button
+        class="theme-picker__current"
+        type="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-label="Välj tema"
+      >
+        <span class="theme-swatch" data-theme-current aria-hidden="true"></span>
+      </button>
+      <ul class="theme-picker__menu" role="menu" hidden>
+        {
+          themes.map((t) => (
+            <li role="none">
+              <button
+                class="theme-picker__option"
+                type="button"
+                role="menuitemradio"
+                data-theme={t.id}
+                aria-label={t.name}
+                title={t.name}
+              >
+                <span
+                  class="theme-swatch"
+                  style={`--swatch:${t.accent}`}
+                  aria-hidden="true"
+                />
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    {
+      links.map((link) => (
+        <a class="nav-link" href={link.href}>
+          {link.label}
+        </a>
+      ))
+    }
+    <button class="nav-link nav-cta" type="button" data-booking-trigger>Boka oss</button>
+  </nav>
+
+  <button
+    class="nav-toggle"
+    type="button"
+    aria-label="Öppna meny"
+    aria-expanded="false"
+    aria-controls="nav-modal"
+  >
+    <span class="nav-toggle__bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+    </span>
+  </button>
+</header>
+
+<div class="nav-modal" id="nav-modal" hidden>
+  <div class="nav-modal__bar">
+    <a class="nav-modal__brand" href={`${base}/`}>Rolling<br />Dough Palace</a>
+    <button class="nav-modal__close" type="button" aria-label="Stäng meny">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+
+  <nav class="nav-modal__links" aria-label="Meny">
+    {
+      links.map((link, i) => (
+        <a
+          class="nav-modal__link"
+          href={link.href}
+          data-tone={link.tone}
+          style={`--i:${i}`}
+        >
+          <span class={`glyph-mark glyph-mark--${link.icon} nav-modal__icon`} aria-hidden="true" />
+          <span class="nav-modal__label">{link.label}</span>
+        </a>
+      ))
+    }
+    <button
+      class="nav-modal__link nav-modal__link--cta"
+      type="button"
+      data-tone="pink"
+      data-booking-trigger
+      style={`--i:${links.length}`}
+    >
+      <span class="glyph-mark glyph-mark--ost nav-modal__icon" aria-hidden="true" />
+      <span class="nav-modal__label">Boka oss</span>
+    </button>
+  </nav>
+</div>
+
+<script>
+  // Theme picker: swap the site palette in place and remember the choice.
+  const picker = document.querySelector<HTMLElement>(".theme-picker");
+  const pickerBtn = picker?.querySelector<HTMLButtonElement>(".theme-picker__current");
+  const pickerMenu = picker?.querySelector<HTMLElement>(".theme-picker__menu");
+  const currentSwatch = picker?.querySelector<HTMLElement>("[data-theme-current]");
+  const options = picker
+    ? Array.from(picker.querySelectorAll<HTMLButtonElement>(".theme-picker__option"))
+    : [];
+
+  const applyTheme = (id: string) => {
+    document.documentElement.setAttribute("data-palette", id);
+    const accent = options.find((o) => o.dataset.theme === id)?.querySelector<HTMLElement>(".theme-swatch")?.style.getPropertyValue("--swatch");
+    if (currentSwatch && accent) currentSwatch.style.setProperty("--swatch", accent);
+    options.forEach((o) =>
+      o.setAttribute("aria-checked", String(o.dataset.theme === id)),
+    );
+    try {
+      localStorage.setItem("rolling-dough-palace-theme", id);
+    } catch {}
+  };
+
+  const closePicker = () => {
+    if (!pickerMenu || !pickerBtn) return;
+    pickerMenu.hidden = true;
+    pickerBtn.setAttribute("aria-expanded", "false");
+  };
+
+  if (picker && pickerBtn && pickerMenu) {
+    // Restore the saved theme (the inline boot script sets the attribute
+    // pre-paint; here we just sync the swatch + checked state).
+    const saved = document.documentElement.getAttribute("data-palette") || "pastel";
+    applyTheme(saved);
+
+    pickerBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = pickerBtn.getAttribute("aria-expanded") === "true";
+      pickerMenu.hidden = isOpen;
+      pickerBtn.setAttribute("aria-expanded", String(!isOpen));
+    });
+
+    options.forEach((opt) =>
+      opt.addEventListener("click", () => {
+        applyTheme(opt.dataset.theme || "pastel");
+        closePicker();
+      }),
+    );
+
+    document.addEventListener("click", (e) => {
+      if (!picker.contains(e.target as Node)) closePicker();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closePicker();
+    });
+  }
+
+  const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+  const modal = document.querySelector<HTMLElement>(".nav-modal");
+  const closeBtn = modal?.querySelector<HTMLButtonElement>(".nav-modal__close");
+
+  if (toggle && modal && closeBtn) {
+    const open = () => {
+      modal.hidden = false;
+      // next frame so the [hidden] removal paints before the open class
+      requestAnimationFrame(() => {
+        modal.classList.add("is-open");
+        document.documentElement.classList.add("nav-locked");
+        toggle.setAttribute("aria-expanded", "true");
+        closeBtn.focus();
+      });
+    };
+
+    const close = () => {
+      modal.classList.remove("is-open");
+      document.documentElement.classList.remove("nav-locked");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.focus();
+      const onEnd = (e: TransitionEvent) => {
+        if (e.target !== modal) return;
+        modal.hidden = true;
+        modal.removeEventListener("transitionend", onEnd);
+      };
+      modal.addEventListener("transitionend", onEnd);
+      // Fallback if no transition fires (reduced motion)
+      window.setTimeout(() => {
+        if (!modal.classList.contains("is-open")) modal.hidden = true;
+      }, 450);
+    };
+
+    toggle.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+    modal.querySelectorAll<HTMLElement>(".nav-modal__link").forEach((a) =>
+      a.addEventListener("click", () => {
+        if (a.hasAttribute("data-booking-trigger")) return;
+        close();
+      }),
+    );
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+    });
+  }
+</script>
